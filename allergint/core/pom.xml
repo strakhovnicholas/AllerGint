@@ -19,7 +19,7 @@
     <packaging>pom</packaging>
 
     <modules>
-
+        <module>interaction-api</module>
         <module>user-service</module>
     </modules>
 
