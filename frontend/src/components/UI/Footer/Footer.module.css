@@ -1,0 +1,16 @@
+.footer {
+  border: 1px solid var(--gray-color);
+  color: var(--gray-color);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.footerWrapper {
+  color: var(--gray-color);
+}
+
+.footerWrapperList {
+  display: flex;
+  justify-content: space-between;
+}

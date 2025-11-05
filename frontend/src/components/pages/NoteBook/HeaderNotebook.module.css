@@ -1,0 +1,60 @@
+.header {
+  padding: 48px 16px;
+  background-color: var(--blue-color);
+  color: var(--light-color);
+}
+
+.headerTitle {
+  width: 290px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 20px;
+}
+
+.headerTitleLink {
+  display: flex;
+  align-items: center;
+}
+
+.headerTitleLinkSvg {
+  color: var(--light-color);
+  transform: rotate(180deg);
+}
+
+.headerTitleBtn {
+  width: 32px;
+  height: 40px;
+  color: var(--light-color);
+  background-color: var(--blue-header-color);
+  border-radius: 0.5rem;
+}
+
+.headerCalendarDay {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: var(--blue-header-color);
+  border-radius: 0.5rem;
+}
+
+.headerCalendarDayTitle {
+  font-size: 16px;
+  font-family: var(--font-main);
+}
+
+.headerCalendarDayBtn {
+  color: var(--light-color);
+}
+
+.headerCalendarDayItems {
+  display: flex;
+}
+
+.headerCalendarDayItem {
+  display: grid;
+  align-items: center;
+
+  height: 40px;
+  background-color: var(--blue-header-color);
+}

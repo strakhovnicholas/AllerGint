@@ -1,12 +1,20 @@
-import React from 'react'
 import './App.css'
-import Header from './components/UI/Header/Header'
+import Footer from './components/UI/Footer/Footer'
+import Notebook from './components/pages/NoteBook/NoteBook'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
   return (
-    <div className="App">
-      <Header></Header>
-    </div>
+    <BrowserRouter>
+      <div>
+        <Routes>
+          {/* <Route index element={} /> */}
+          <Route path="notebook" element={<Notebook />} />
+        </Routes>
+
+        <Footer />
+      </div>
+    </BrowserRouter>
   )
 }
 

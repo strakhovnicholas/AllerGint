@@ -1,0 +1,28 @@
+.footerIconWrapper {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--gray-color);
+}
+
+.footerIconIcon {
+  opacity: 0.3;
+}
+
+.footerIconText {
+  color: var(--gray-color);
+  font-family: var(--font-main);
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.activeIcon {
+  opacity: 1;
+  filter: invert(24%) sepia(55%) saturate(1200%) hue-rotate(185deg)
+    brightness(90%) contrast(90%);
+}
+
+.activeText {
+  color: var(--blue-color);
+}
