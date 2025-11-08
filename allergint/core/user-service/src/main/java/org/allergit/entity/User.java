@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.allergit.user.dto.UserRole;
 
 import java.util.UUID;
 
@@ -31,5 +32,9 @@ public class User {
     private String email;
     @NotBlank(message = "Password cannot be blank!")
     private String password;
+    @NotNull(message = "User role cannot be null")
+    private UserRole role;
+
+    private UUID diaryId;
 
 }
