@@ -1,13 +1,12 @@
-package org.allergit.entity.entity;
+package org.allergit.weather.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.allergit.diary.enums.WeatherCondition;
-import org.allergit.diarypage.entity.DiaryPage;
 import org.hibernate.proxy.HibernateProxy;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -24,11 +23,9 @@ public class Weather {
     @Enumerated(EnumType.STRING)
     private WeatherCondition weatherCondition;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "diary_page_id")
-    private DiaryPage diaryPage;
+    private Double temperature;
 
-    private LocalDateTime timestamp;
+    private ZonedDateTime timestamp;
 
     @Override
     public final boolean equals(Object o) {

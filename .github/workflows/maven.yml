@@ -18,8 +18,13 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
+      - name: Comment out lines in application.yaml for tests
+        run: |
+          sed -i 's/^\s*config:/# &/' allergint/core/diary-service/src/main/resources/application.yaml
+          sed -i 's/^\s*import: "configserver:"/# &/' allergint/core/diary-service/src/main/resources/application.yaml
+          sed -i 's/^\s*config:/# &/' allergint/core/user-service/src/main/resources/application.yaml
+          sed -i 's/^\s*import: "configserver:"/# &/' allergint/core/user-service/src/main/resources/application.yaml
       - name: Build all modules
         run: |
           cd allergint/core
-          # Build with per-module logging and fail fast
           mvn clean install -B -pl interaction-api,user-service,diary-service -am -DskipTests=false

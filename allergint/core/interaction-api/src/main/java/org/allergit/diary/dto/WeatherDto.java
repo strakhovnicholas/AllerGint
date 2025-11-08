@@ -1,18 +1,16 @@
 package org.allergit.diary.dto;
 
-import lombok.Value;
+import lombok.Data;
 import org.allergit.diary.enums.WeatherCondition;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
-/**
- * DTO for {@link org.allergit.entity.entity.Weather}
- */
-@Value
+@Data
 public class WeatherDto implements Serializable {
     UUID id;
     WeatherCondition weatherCondition;
-    LocalDateTime timestamp;
+    ZonedDateTime timestamp;
+    private Double temperature;
 }

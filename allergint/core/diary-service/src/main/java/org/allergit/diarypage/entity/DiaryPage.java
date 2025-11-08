@@ -4,13 +4,15 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.allergit.diary.enums.HealthState;
-import org.allergit.entity.entity.Weather;
 import org.allergit.medicine.entity.Medicine;
 import org.allergit.symptom.entity.UserSymptom;
+import org.allergit.weather.entity.Weather;
 import org.hibernate.validator.constraints.Length;
 
-import java.time.LocalDate;
-import java.util.*;
+import java.time.ZonedDateTime;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -27,18 +29,37 @@ public class DiaryPage {
     @Enumerated(EnumType.STRING)
     private HealthState healthState;
 
-    private LocalDate timestamp;
-
-    @OneToMany(mappedBy = "diaryPage", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "diary_page_id")
     private Set<Medicine> medicines = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "diaryPage", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserSymptom> userSymptoms = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "diary_page_id")
+    private Set<UserSymptom> userSymptoms = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "diaryPage", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "diary_page_id")
     private Set<Weather> weathers = new LinkedHashSet<>();
+
+    private ZonedDateTime timestamp;
 
     @Length(max = 1000, message = "Too much characters")
     private String userNotes;
+
+    public Set<Medicine> getMedicines() {
+        if (medicines == null) medicines = new LinkedHashSet<>();
+        return medicines;
+    }
+
+    public Set<UserSymptom> getUserSymptoms() {
+        if (userSymptoms == null) userSymptoms = new LinkedHashSet<>();
+        return userSymptoms;
+    }
+
+    public Set<Weather> getWeathers() {
+        if (weathers == null) weathers = new LinkedHashSet<>();
+        return weathers;
+    }
+
 
 }
