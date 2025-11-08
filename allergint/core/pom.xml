@@ -21,6 +21,7 @@
     <modules>
         <module>interaction-api</module>
         <module>user-service</module>
+        <module>diary-service</module>
     </modules>
 
 </project>

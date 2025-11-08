@@ -7,13 +7,14 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.allergit.user.enums.UserRole;
 
 import java.util.UUID;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -31,5 +32,10 @@ public class User {
     private String email;
     @NotBlank(message = "Password cannot be blank!")
     private String password;
+    @NotNull(message = "User role cannot be null")
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+
+    private UUID diaryId;
 
 }
