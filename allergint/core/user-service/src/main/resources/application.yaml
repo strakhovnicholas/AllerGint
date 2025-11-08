@@ -1,6 +1,8 @@
 spring:
   application:
     name: user-service
+  profiles:
+    default: default
   cloud:
     config:
       discovery:
@@ -10,8 +12,8 @@ spring:
       retry:
         use-random-policy: true
         max-interval: 6000
-  config:
-    import: "configserver:"
+#  config:
+#    import: "configserver:"
 
 eureka:
   client:

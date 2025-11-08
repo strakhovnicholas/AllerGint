@@ -1,4 +1,4 @@
-package org.allergit.user.dto;
+package org.allergit.user.enums;
 
 public enum UserRole {
     USER,

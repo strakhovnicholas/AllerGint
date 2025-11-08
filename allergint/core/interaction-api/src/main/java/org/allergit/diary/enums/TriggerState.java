@@ -1,4 +1,4 @@
-package org.allergit.diary;
+package org.allergit.diary.enums;
 
 public enum TriggerState {
     STRONG,

@@ -1,10 +1,10 @@
-package org.allergit.entity;
+package org.allergit.trigger.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
-import org.allergit.diary.TriggerState;
+import org.allergit.diary.enums.TriggerState;
 
 import java.util.UUID;
 
@@ -21,5 +21,6 @@ public class AllergyTrigger {
     @NotBlank
     private String triggerName;
 
+    @Enumerated(EnumType.STRING)
     private TriggerState triggerState;
 }
