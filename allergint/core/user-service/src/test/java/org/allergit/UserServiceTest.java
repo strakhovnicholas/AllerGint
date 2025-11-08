@@ -32,6 +32,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class UserServiceTest {
 
     private final UserService userService;
+
     private final UserMapper userMapper;
 
     private UserDto testUserDto;
