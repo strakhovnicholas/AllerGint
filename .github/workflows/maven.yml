@@ -20,7 +20,7 @@ jobs:
           cache: maven
       - name: Build user‑service
         run: |
-          cd allergint/user-service
+          cd allergint/core/user-service
           mvn clean install -B
 
   build-diary-service:
@@ -36,5 +36,5 @@ jobs:
           cache: maven
       - name: Build diary‑service
         run: |
-          cd allergint/diary-service
+          cd allergint/core/diary-service
           mvn clean install -B
