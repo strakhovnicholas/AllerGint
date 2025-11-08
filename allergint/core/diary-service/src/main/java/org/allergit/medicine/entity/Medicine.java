@@ -6,10 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.allergit.diary.enums.DoseMeasureType;
 import org.allergit.diary.enums.MedicineType;
-import org.allergit.diarypage.entity.DiaryPage;
 import org.hibernate.proxy.HibernateProxy;
 
-import java.util.Objects;
 import java.util.UUID;
 
 @Getter
@@ -19,7 +17,7 @@ import java.util.UUID;
 public class Medicine {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id", nullable = false)
+    @Column(nullable = false)
     private UUID id;
 
     private String medicineName;
@@ -32,10 +30,6 @@ public class Medicine {
     @NotNull
     private Double dose;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "diary_page_id")
-    private DiaryPage diaryPage;
-
     @Enumerated(EnumType.STRING)
     private DoseMeasureType doseMeasureType;
 
@@ -43,15 +37,19 @@ public class Medicine {
     public final boolean equals(Object o) {
         if (this == o) return true;
         if (o == null) return false;
-        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
-        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        Class<?> oEffectiveClass = o instanceof HibernateProxy
+                ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass()
+                : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy
+                ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass()
+                : getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
         Medicine medicine = (Medicine) o;
-        return getId() != null && Objects.equals(getId(), medicine.getId());
+        return id != null && id.equals(medicine.id);
     }
 
     @Override
     public final int hashCode() {
-        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+        return id != null ? id.hashCode() : 0;
     }
 }
