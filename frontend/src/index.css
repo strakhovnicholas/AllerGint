@@ -1,74 +1,74 @@
 :root {
-  --blue-color: rgb(37 93 138);
-  --blue-header-color: rgb(59, 110, 150);
-  --blue-smooth-color: #bfdbfe;
-  --lightblue-transparent-color: rgb(239, 246, 255);
-  --light-color: #fff;
-  --light-transparent-color: rgb(255 255 255 / 0.1);
-  --dark-color: #000000;
-  --dark-smooth-color: rgb(55, 65, 81);
-  --primary-color: #ef4444;
-  --primary-bg-color: rgb(254, 242, 242);
-  --primary-border-color: rgb(254, 202, 202);
-  --orange-color: rgb(249, 115, 22);
-  --orange-bg-color: rgb(255, 247, 237);
-  --orange-border-color: rgb(254, 215, 170);
-  --yellow-color: rgb(234, 179, 8);
-  --yellow-bg-color: rgb(254, 252, 232);
-  --yellow-border-color: rgb(254, 240, 138);
-  --green-color: rgb(34, 197, 94);
-  --green-bg-color: rgb(240, 253, 244);
-  --gray-color: rgb(156, 163, 175);
+   --blue-color: rgb(37 93 138);
+   --blue-header-color: rgb(59, 110, 150);
+   --blue-smooth-color: #bfdbfe;
+   --lightblue-transparent-color: rgb(239, 246, 255);
+   --lightblue-background-color: #e8f4fd;
+   --light-color: #fff;
+   --light-transparent-color: rgb(255 255 255 / 0.1);
+   --dark-color: #000000;
+   --dark-smooth-color: rgb(55, 65, 81);
+   --primary-color: #ef4444;
+   --primary-bg-color: rgb(254, 242, 242);
+   --primary-border-color: rgb(254, 202, 202);
+   --orange-color: rgb(249, 115, 22);
+   --orange-bg-color: rgb(255, 247, 237);
+   --orange-border-color: rgb(254, 215, 170);
+   --yellow-color: rgb(234, 179, 8);
+   --yellow-bg-color: rgb(254, 252, 232);
+   --yellow-border-color: rgb(254, 240, 138);
+   --green-color: rgb(34, 197, 94);
+   --green-bg-color: rgb(240, 253, 244);
+   --gray-color: rgb(156, 163, 175);
 
-  --font-main: ui-sans-serif, system-ui, sans-serif, Apple Color Emoji,
-    Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-  overflow: hidden;
+   --font-main: ui-sans-serif, system-ui, sans-serif, Apple Color Emoji,
+      Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  border: none;
-  box-sizing: border-box;
-  font-family: var(--font-main);
+   margin: 0;
+   padding: 0;
+   border: none;
+   box-sizing: border-box;
+   font-family: var(--font-main);
 }
 
 a,
 a:link,
 a:visited {
-  text-decoration: none;
-  color: black;
+   text-decoration: none;
+   color: black;
 }
 
 a:hover {
-  text-decoration: none;
+   text-decoration: none;
 }
 
 ul,
 ul li {
-  list-style: none;
+   list-style: none;
 }
 
 input:focus,
 input:active,
 button:focus,
 button:active {
-  outline: none;
+   outline: none;
 }
 
 button {
-  background-color: transparent;
+   background-color: transparent;
 }
 
 button::-moz-focus-inner {
-  padding: 0;
-  border: 0;
+   padding: 0;
+   border: 0;
 }
 
 h5 {
-  font-size: 24px;
+   font-size: 24px;
 }
 
 .headerSubtitle {
-  color: var(--blue-smooth-color);
+   color: var(--blue-smooth-color);
 }

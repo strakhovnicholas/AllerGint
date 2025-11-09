@@ -1,0 +1,16 @@
+.body {
+   height: 365px;
+   width: 84%;
+   margin: auto;
+   padding: 1rem;
+   box-shadow: 0 5px 10px 1px rgba(0, 0, 0, 0.15);
+   border-radius: 1.5rem;
+   background-color: #fff;
+}
+
+.title {
+   margin: 1rem 1rem;
+   font: var(--font-main);
+   font-size: 1.2rem;
+   font-weight: 600;
+}

@@ -1,0 +1,117 @@
+.header {
+   padding: 48px 16px;
+   background-color: var(--blue-color);
+   color: var(--light-color);
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   gap: 2em;
+}
+
+.headerTitle {
+   display: flex;
+   align-items: center;
+   font-size: 16px;
+   justify-content: space-between;
+   gap: 1em;
+}
+
+.headerTitleAvatar {
+   width: 40px;
+   height: 40px;
+   border-radius: 50%;
+}
+
+.headerTitleTitle {
+   font: var(--font-main);
+   font-size: 1.2rem;
+   font-weight: 700;
+   flex-wrap: wrap;
+}
+
+.headerTitleDescription {
+   font: var(--font-main);
+   font-size: 1em;
+   font-weight: 500;
+   color: var(--blue-smooth-color);
+}
+
+.headerTitleText {
+   display: flex;
+   flex-direction: column;
+   gap: 0.25em;
+}
+
+.headerTitleIcon {
+   width: 40px;
+   height: 40px;
+   display: flex;
+   align-items: center;
+   justify-content: right;
+}
+
+.headerWeatherCard {
+   padding: 1.5rem 1rem;
+   background-color: #ffffff1a;
+   width: 90%;
+   border-radius: 1em;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.weatherCardLeft {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: start;
+}
+
+.leftTown {
+   font: var(--font-main);
+   font-size: 1.2rem;
+   color: var(--blue-smooth-color);
+}
+
+.leftTemperature {
+   font: var(--font-main);
+   font-size: 1.5rem;
+   font-weight: 700;
+   color: var(--light-color);
+}
+
+.leftTemperature::after {
+   content: '\00B0';
+}
+
+.leftWeather {
+   font: var(--font-main);
+   font-size: 1rem;
+   color: var(--light-color);
+}
+
+.weatherCardRight {
+   display: flex;
+   flex-direction: column;
+   align-items: end;
+   justify-content: center;
+}
+
+.rightPollen {
+   font: var(--font-main);
+   font-size: 1rem;
+   color: var(--light-color);
+   margin: 0.5rem 0;
+}
+
+.rightSource {
+   background-color: red;
+   padding: 0.3rem 0.7rem;
+   border-radius: 1.5rem;
+   font: var(--font-main);
+   font-size: 1rem;
+   color: var(--light-color);
+   width: 130%;
+   display: flex;
+   justify-content: right;
+}

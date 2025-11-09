@@ -13,6 +13,7 @@ function App() {
                <Route path="notebook" element={<Notebook />} />
             </Routes>
 
+            <div className="footer"></div>
             <Footer />
          </div>
       </BrowserRouter>
