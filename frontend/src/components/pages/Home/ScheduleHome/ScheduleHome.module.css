@@ -14,3 +14,51 @@
    font-size: 1.2rem;
    font-weight: 600;
 }
+
+.task {
+   box-shadow: 0 0 0 2px red insert;
+}
+
+.icon {
+   filter: brightness(0) saturate(100%) invert(16%) sepia(100%) saturate(5000%)
+      hue-rotate(0deg);
+}
+
+.notification {
+   background-color: #fff;
+   border-radius: 12px;
+   padding: 0.5rem 1rem;
+   margin-bottom: 12px;
+   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+   border-left: 4px solid #ff4757;
+
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+
+   background-color: rgba(255, 0, 0, 0.05);
+}
+
+.notificationContent {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.info {
+   display: flex;
+   flex-direction: column;
+   gap: 4px;
+}
+
+.taskName {
+   font-size: 1.2rem;
+   font-weight: 600;
+   color: #2d3436;
+}
+
+.time {
+   font-size: 1rem;
+   color: #636e72;
+   font-weight: 400;
+}
