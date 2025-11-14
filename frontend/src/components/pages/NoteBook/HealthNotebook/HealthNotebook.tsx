@@ -3,15 +3,34 @@ import styles from './HealthNotebook.module.css'
 
 function HealthNotebook() {
   return (
-    <div className="card first">
-      <p>Общее самочувствие</p>
-      <p>Плохо Отлично</p>
-      <button>1</button>
-      <button>2</button>
-      <button>3</button>
-      <button>4</button>
-      <button>5</button>
-      <p>Выбрано - это</p>
+    <div className={`card first ${styles.healthWrapper}`}>
+      <div className={styles.healthNotebookTitle}>
+        <p className="title">Общее самочувствие</p>
+      </div>
+      <div className={styles.healthNotebookBtnsTitles}>
+        <p>Плохо</p>
+        <p>Отлично</p>
+      </div>
+      <div className={styles.healthNotebookBtns}>
+        <button
+          className={`${styles.healthNotebookBtn} ${styles.worse}`}
+        ></button>
+        <button
+          className={`${styles.healthNotebookBtn} ${styles.bad}`}
+        ></button>
+        <button
+          className={`${styles.healthNotebookBtn} ${styles.normal}`}
+        ></button>
+        <button
+          className={`${styles.healthNotebookBtn} ${styles.good}`}
+        ></button>
+        <button
+          className={`${styles.healthNotebookBtn} ${styles.best}`}
+        ></button>
+      </div>
+      <p className={styles.healthNotebookBtnsSubTitles}>
+        Выбрано - <span className={styles.healthNotebookBtnsRes}>это</span>
+      </p>
     </div>
   )
 }
