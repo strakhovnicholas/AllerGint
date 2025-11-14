@@ -9,7 +9,7 @@
    border-radius: 2rem;
 
    background-color: var(--orange-bg-color);
-   color: var(--orange-color);
+   color: var(--orange-smooth-color);
 }
 
 .wrapper {
@@ -74,7 +74,7 @@
    align-items: center;
    gap: 1rem;
 
-   color: var(--primary-color);
+   color: var(--orange-smooth-color);
    font: var(--font-main);
    font-size: 1.4rem;
 }
@@ -88,7 +88,7 @@
    font: var(--font-main);
    font-size: 1.2rem;
    font-weight: 400;
-   color: var(--primary-color);
+   color: var(--orange-smooth-color);
 
    list-style-type: disc;
    line-height: 1.4;
