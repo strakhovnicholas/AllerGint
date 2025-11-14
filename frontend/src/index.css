@@ -21,6 +21,7 @@
    --green-bg-color: rgb(240, 253, 244);
    --gray-color: rgb(156, 163, 175);
    --gray-bg-color: rgba(156, 163, 175, 0.3);
+   --gray-smooth-color: #4b5563;
 
    --font-main: ui-sans-serif, system-ui, sans-serif, Apple Color Emoji,
       Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
@@ -70,11 +71,6 @@ h5 {
    font-size: 24px;
 }
 
-.first {
-   position: relative;
-   top: -2rem;
-}
-
 .card {
    width: 92%;
    margin: auto;
@@ -82,12 +78,19 @@ h5 {
    box-shadow: 0 5px 10px 1px rgba(0, 0, 0, 0.15);
    border-radius: 1.5rem;
    background-color: #fff;
+   margin-bottom: 2rem;
+}
+
+.first {
+   position: relative;
+   top: -2rem;
+   margin-bottom: 0;
 }
 
 .title {
    margin: 1rem 1rem;
    font: var(--font-main);
-   font-size: 1.2rem;
+   font-size: 1.4rem;
    font-weight: 600;
 }
 

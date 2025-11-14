@@ -24,7 +24,7 @@
 }
 
 .red {
-   background-color: red;
+   background-color: var(--primary-color);
 }
 
 .orange {
