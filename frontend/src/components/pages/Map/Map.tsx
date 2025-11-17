@@ -1,8 +1,10 @@
 import ConcentrationMap from './ConcentrationMap/ConcentrationMap'
 import FilterMap from './FilterMap/FilterMap'
 import HeaderMap from './HeaderMap/HeaderMap'
+import LocationMap from './LocationMap/LocationMap'
 import style from './Map.module.css'
 import MapMap from './MapMap/MapMap'
+import NearPlacesMap from './NearPlacesMap/NearPlacesMap'
 
 function Map() {
    return (
@@ -16,6 +18,12 @@ function Map() {
          </div>
          <div className={style.concentration}>
             <ConcentrationMap />
+         </div>
+         <div className={style.location}>
+            <LocationMap />
+         </div>
+         <div className={style.nearPlaces}>
+            <NearPlacesMap />
          </div>
       </>
    )

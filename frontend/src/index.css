@@ -12,6 +12,7 @@
   --primary-bg-color: rgb(254, 242, 242);
   --primary-border-color: rgb(254, 202, 202);
   --orange-color: rgb(249, 115, 22);
+  --orange-smooth-color: #c2410c;
   --orange-bg-color: rgb(255, 247, 237);
   --orange-border-color: rgb(254, 215, 170);
   --yellow-color: rgb(234, 179, 8);
@@ -88,9 +89,9 @@ h5 {
 }
 
 .title {
-  /* margin: 1rem 1rem; */
+  margin: 1rem 1rem;
   font: var(--font-main);
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 600;
 }
 

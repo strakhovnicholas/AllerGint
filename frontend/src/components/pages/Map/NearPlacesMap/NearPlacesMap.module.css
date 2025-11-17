@@ -1,0 +1,62 @@
+.district {
+   background-color: #fff;
+   border-radius: 12px;
+   padding: 0.5rem 1rem;
+   margin-bottom: 12px;
+   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+   border-left: 0.3rem solid #ff4757;
+
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+
+   background-color: rgba(255, 0, 0, 0.05);
+}
+
+.left {
+   display: flex;
+   flex-direction: column;
+   align-items: start;
+   justify-content: space-around;
+}
+
+.name {
+   color: var(--dark-color);
+   font: var(--font-main);
+   font-size: 1.2rem;
+   font-weight: 600;
+}
+
+.direction {
+   color: var(--gray-smooth-color);
+   font: var(--font-main);
+   font-size: 1rem;
+   font-weight: 400;
+}
+
+.right {
+   display: flex;
+   flex-direction: column;
+   align-items: end;
+   justify-content: space-around;
+}
+
+.level {
+   background-color: var(--primary-color);
+   color: var(--light-color);
+
+   border-radius: 2rem;
+
+   padding: 0.1rem 1rem;
+
+   font: var(--font-main);
+   font-size: 0.8rem;
+   font-weight: 400;
+}
+
+.concentration {
+   color: var(--gray-smooth-color);
+   font: var(--font-main);
+   font-size: 0.8rem;
+   font-weight: 400;
+}
