@@ -1,0 +1,6 @@
+gigachat:
+  auth-key: MDE5YThlMjctNDJiMS03NzRjLWE4ZDAtMzM2NzEwMWFmNTAxOmQ0YzRhZmY3LTc2MWMtNGQxMC1hYzU3LTE5MGNjNDgzODNiMg==
+
+spring:
+  application:
+    name: allergy-gigachat-client
