@@ -5,7 +5,7 @@ function HealthNotebook() {
   return (
     <div className={`card first ${styles.healthWrapper}`}>
       <div className={styles.healthNotebookTitle}>
-        <p className="title">Общее самочувствие</p>
+        <p className={styles.title}>Общее самочувствие</p>
       </div>
       <div className={styles.healthNotebookBtnsTitles}>
         <p>Плохо</p>

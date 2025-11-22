@@ -2,6 +2,7 @@
   --blue-color: rgb(37 93 138);
   --blue-header-color: rgb(59, 110, 150);
   --blue-smooth-color: #bfdbfe;
+  --blue-bg-color: rgb(232, 244, 253);
   --lightblue-transparent-color: rgb(239, 246, 255);
   --lightblue-background-color: #e8f4fd;
   --light-color: #fff;
@@ -89,14 +90,22 @@ h5 {
 }
 
 .title {
-  margin: 1rem 1rem;
+  margin: 0.5rem 0 0.5rem 0;
   font: var(--font-main);
   font-size: 1.4rem;
   font-weight: 600;
 }
 
 .headerSubtitle {
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   line-height: 1rem;
   color: var(--blue-smooth-color);
+}
+
+.mainSubTitles {
+  margin: 0 auto;
+  color: var(--gray-smooth-color);
+  font-size: 1rem;
+  line-height: 1.25rem;
+  text-transform: capitalize;
 }

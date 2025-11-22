@@ -1,3 +1,9 @@
+.title {
+  font: var(--font-main);
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
 .healthWrapper {
   display: flex;
   flex-direction: column;
