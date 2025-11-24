@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import style from './MapMap.module.css'
+import ConcentrationDataMap from '../ConcentrationMap/ConcentrationDataMap'
 
 // Настройка иконок для маркеров
 delete (L.Icon.Default.prototype as any)._getIconUrl
@@ -36,7 +37,7 @@ function MapMap() {
          <MapContainer
             center={center}
             zoom={zoom}
-            style={{ height: '100%', width: '100%', zIndex: -1 }}
+            style={{ height: '100%', width: '100%' }}
             zoomControl={false}
             scrollWheelZoom={true}
             touchZoom={true}
@@ -44,8 +45,8 @@ function MapMap() {
             key={zoom}
          >
             <TileLayer
-               attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+               attribution='© <a href="https://carto.com/attributions">CARTO</a>'
+               url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
             />
             <Marker position={center}>
                <Popup>
@@ -54,6 +55,9 @@ function MapMap() {
                   Москва, Россия
                </Popup>
             </Marker>
+
+            {/* Компонент отображения концентрации пыльцы */}
+            <ConcentrationDataMap />
          </MapContainer>
 
          <div className={style.controls}>
