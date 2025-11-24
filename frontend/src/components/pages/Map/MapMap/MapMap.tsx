@@ -80,6 +80,9 @@ function MapMap() {
          </div>
 
          <div className={style.zoomLevel}>Масштаб: {zoom}</div>
+
+         {/* Белый прямоугольник для скрытия атрибуции Leaflet */}
+         <div className={style.attributionCover}></div>
       </div>
    )
 }
