@@ -1,0 +1,41 @@
+.description {
+   font: var(--font-main);
+   font-size: 1rem;
+   line-height: 1.25rem;
+   color: var(--gray-smooth-color);
+   margin: 0;
+}
+
+.therapyItem {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 12px 0;
+   border-bottom: 1px solid var(--blue-bg-color);
+}
+
+.therapyName {
+   font: var(--font-main);
+   font-size: 1rem;
+   color: var(--dark-color);
+   font-weight: 500;
+}
+
+.therapyStatus {
+   padding: 4px 12px;
+   border-radius: 1rem;
+   font: var(--font-main);
+   font-size: 0.9rem;
+   font-weight: 500;
+   background-color: var(--green-bg-color);
+   color: var(--green-color);
+}
+
+.nextInjection {
+   font: var(--font-main);
+   font-size: 1.1rem;
+   color: var(--blue-color);
+   font-weight: 600;
+   margin: 0;
+   text-align: center;
+}
