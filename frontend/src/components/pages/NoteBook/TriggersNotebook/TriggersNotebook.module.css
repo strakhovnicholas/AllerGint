@@ -4,6 +4,15 @@
   font-weight: 600;
 }
 
+.triggersTitle {
+  display: flex;
+  justify-content: space-between;
+}
+
 .triggersActive {
   background: var(--blue-bg-color);
+}
+
+.triggersBtn {
+  color: var(--blue-color);
 }
