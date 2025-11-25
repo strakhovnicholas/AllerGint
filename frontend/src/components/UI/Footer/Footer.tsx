@@ -25,12 +25,12 @@ function Footer() {
                      isActive={activeIcon === 'notebook'}
                   />
                </div>
-               <div onClick={() => setActiveIcon('pils')}>
+               <div onClick={() => setActiveIcon('asit')}>
                   <FooterIcon
-                     link="/pils"
-                     svgPath="/img/svg/pils.svg"
-                     text="Лекарства"
-                     isActive={activeIcon === 'pils'}
+                     link="/asit"
+                     svgPath="/img/svg/syringe.svg"
+                     text="АСИТ"
+                     isActive={activeIcon === 'asit'}
                   />
                </div>
                <div onClick={() => setActiveIcon('map')}>
