@@ -19,6 +19,9 @@ CREATE TABLE IF NOT EXISTS diary
 )
     );
 
+ALTER TABLE diary
+    ADD COLUMN IF NOT EXISTS ai_notes VARCHAR (2000);
+
 CREATE INDEX idx_diary_user_timestamp ON diary (user_id, timestamp);
 
 CREATE TABLE IF NOT EXISTS weather

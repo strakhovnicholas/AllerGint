@@ -22,6 +22,8 @@
         <module>interaction-api</module>
         <module>user-service</module>
         <module>diary-service</module>
+        <module>GigaChatInteraction-api</module>
+        <module>weather-service</module>
     </modules>
 
 </project>

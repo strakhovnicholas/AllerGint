@@ -26,4 +26,5 @@ public interface DiaryPageRepository extends JpaRepository<DiaryPage, UUID> {
             "AND FUNCTION('DATE', d.timestamp) = :date")
     Optional<DiaryPage> findByUserIdAndExactDay(@Param("userId") UUID userId, @Param("date") ZonedDateTime date);
 
+
 }

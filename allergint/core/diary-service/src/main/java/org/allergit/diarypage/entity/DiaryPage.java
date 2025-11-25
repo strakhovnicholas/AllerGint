@@ -46,6 +46,9 @@ public class DiaryPage {
     @Length(max = 1000, message = "Too much characters")
     private String userNotes;
 
+    @Length(max = 2000)
+    private String aiNotes;
+
     public Set<Medicine> getMedicines() {
         if (medicines == null) medicines = new LinkedHashSet<>();
         return medicines;
@@ -60,6 +63,4 @@ public class DiaryPage {
         if (weathers == null) weathers = new LinkedHashSet<>();
         return weathers;
     }
-
-
 }

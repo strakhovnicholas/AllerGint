@@ -38,7 +38,7 @@ public class GigaChatService implements AiService {
         return GigaChatResponse.builder().answer(aiAnswer).clientId(request.getClientId()).build();
     }
 
-    private String sendPrompt(String request) {
+    public String sendPrompt(String request) {
         var response = client.completions(
                 CompletionRequest.builder()
                         .model(ModelName.GIGA_CHAT_PRO)
@@ -48,8 +48,7 @@ public class GigaChatService implements AiService {
                                 .build())
                         .build());
 
-        String aiAnswer = response.choices().getFirst().message().content();
-        return aiAnswer;
+        return response.choices().getFirst().message().content();
     }
 
 }

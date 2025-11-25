@@ -86,4 +86,14 @@ public class DiaryPageController {
     ) {
         return ResponseEntity.ok(service.addWeather(id, dto));
     }
+
+    @PatchMapping("/{userId}/note")
+    public ResponseEntity<Void> updateUserNote(
+            @PathVariable UUID userId,
+            @RequestBody String userNotes,
+            @RequestParam UUID diaryPageId
+    ) {
+        service.updateUserNote(userId, userNotes, diaryPageId);
+        return ResponseEntity.accepted().build();
+    }
 }
