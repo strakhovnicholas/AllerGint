@@ -1,0 +1,40 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/users/**
+
+        - id: diary-service
+          uri: lb://diary-service
+          predicates:
+            - Path=/api/diary/**
+
+        - id: medicine-service
+          uri: lb://medicine-service
+          predicates:
+            - Path=/api/medicines/**
+
+        - id: symptom-service
+          uri: lb://symptom-service
+          predicates:
+            - Path=/api/symptoms/**
+
+        - id: trigger-service
+          uri: lb://trigger-service
+          predicates:
+            - Path=/api/triggers/**
+
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery-server:8761/eureka
