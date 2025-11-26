@@ -1,6 +1,7 @@
 package org.allergit.diary.kafka;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.allergit.diary.dto.MedicineDto;
@@ -14,6 +15,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class DiaryNoteMessage {
     private UUID userId;
     private UUID diaryPageId;
