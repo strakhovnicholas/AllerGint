@@ -8,9 +8,9 @@
         <artifactId>core</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-
-    <artifactId>diary-service</artifactId>
     <packaging>jar</packaging>
+    <artifactId>diary-service</artifactId>
+
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
