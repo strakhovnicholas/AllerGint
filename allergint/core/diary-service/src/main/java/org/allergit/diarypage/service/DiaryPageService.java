@@ -246,20 +246,25 @@ public class DiaryPageService {
         log.debug("Checking if diaryPage id={} should be sent to Kafka", diary.getId());
 
         if (diary.getHealthState() != null &&
-                !diary.getUserSymptoms().isEmpty() &&
-                !diary.getWeathers().isEmpty()) {
+                !diary.getUserSymptoms().isEmpty()) {
 
             log.info("Sending DiaryPage id={} to Kafka", diary.getId());
 
-            DiaryNoteMessage message = new DiaryNoteMessage(
-                    diary.getUserId(),
-                    diary.getId(),
-                    diary.getUserNotes(),
-                    diary.getHealthState(),
-                    diary.getUserSymptoms().stream().map(symptomMapper::toDto).collect(Collectors.toSet()),
-                    diary.getWeathers().stream().map(weatherMapper::toDto).collect(Collectors.toSet()),
-                    diary.getMedicines().stream().map(medicineMapper::toDto).collect(Collectors.toSet())
-            );
+            DiaryNoteMessage.DiaryNoteMessageBuilder builder = DiaryNoteMessage.builder()
+                    .userId(diary.getUserId())
+                    .diaryPageId(diary.getId())
+                    .userNotes(diary.getUserNotes())
+                    .healthState(diary.getHealthState())
+                    .userSymptoms(diary.getUserSymptoms()
+                            .stream().map(symptomMapper::toDto).collect(Collectors.toSet()))
+                    .medicines(diary.getMedicines()
+                            .stream().map(medicineMapper::toDto).collect(Collectors.toSet()));
+
+            if (diary.getWeathers() != null && !diary.getWeathers().isEmpty()) {
+                builder.weathers(diary.getWeathers().stream().map(weatherMapper::toDto).collect(Collectors.toSet()));
+            }
+
+            DiaryNoteMessage message = builder.build();
 
             diaryNoteService.sendNoteMessage(message);
         }

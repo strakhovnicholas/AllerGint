@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS user_symptom
     id            UUID PRIMARY KEY,
     symptom_name  VARCHAR(255)             NOT NULL,
     symptom_state VARCHAR(50),
-    timestamp     TIMESTAMP WITH TIME ZONE NOT NULL
+    timestamp TIMESTAMP WITH TIME ZONE
 );
 
 CREATE TABLE IF NOT EXISTS weather
@@ -54,8 +54,8 @@ CREATE TABLE IF NOT EXISTS diary_symptom
 
 CREATE TABLE IF NOT EXISTS diary_weather
 (
-    diary_id   UUID NOT NULL,
-    weather_id UUID NOT NULL,
+    diary_id   UUID,
+    weather_id UUID,
     PRIMARY KEY (diary_id, weather_id),
     CONSTRAINT fk_diary_weather_diary FOREIGN KEY (diary_id) REFERENCES diary (id) ON DELETE CASCADE,
     CONSTRAINT fk_diary_weather_weather FOREIGN KEY (weather_id) REFERENCES weather (id) ON DELETE CASCADE
