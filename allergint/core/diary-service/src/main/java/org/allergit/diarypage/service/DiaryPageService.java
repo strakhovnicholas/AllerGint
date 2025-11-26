@@ -2,15 +2,13 @@ package org.allergit.diarypage.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.allergit.diary.dto.DiaryPageDto;
-import org.allergit.diary.dto.MedicineDto;
-import org.allergit.diary.dto.UserSymptomDto;
-import org.allergit.diary.dto.WeatherDto;
+import org.allergit.diary.dto.*;
+import org.allergit.diary.kafka.DiaryNoteMessage;
 import org.allergit.diarypage.entity.DiaryPage;
 import org.allergit.diarypage.mapper.DiaryPageMapper;
 import org.allergit.diarypage.repository.DiaryPageRepository;
 import org.allergit.exception.NotFoundException;
-import org.allergit.kafka.payload.DiaryNoteMessage;
+import org.allergit.feign.UserClient;
 import org.allergit.kafka.service.DiaryNoteService;
 import org.allergit.medicine.mapper.MedicineMapper;
 import org.allergit.medicine.service.MedicineService;
@@ -21,9 +19,9 @@ import org.allergit.weather.service.WeatherService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -32,112 +30,226 @@ import java.util.stream.Collectors;
 @Transactional
 @RequiredArgsConstructor
 public class DiaryPageService {
-
     private final DiaryPageRepository repository;
     private final DiaryPageMapper mapper;
     private final MedicineService medicineService;
-    private final WeatherService weatherService;
     private final UserSymptomService symptomService;
-    private final UserSymptomMapper symptomMapper;
+    private final WeatherService weatherService;
     private final MedicineMapper medicineMapper;
+    private final UserSymptomMapper symptomMapper;
     private final WeatherMapper weatherMapper;
     private final DiaryNoteService diaryNoteService;
+    private final UserClient userClient;
 
-    public DiaryPageDto create(DiaryPageDto dto) {
-        DiaryPage saved = repository.save(mapper.toEntity(dto));
-        checkAndSendToKafka(saved);
-        return mapper.toDto(saved);
+    public DiaryPageDto create(DiaryPageDto dto, UUID userId) {
+        log.info("Creating diary page for userId={}", userId);
+        validateUserExists(userId);
+
+        dto.setUserId(userId);
+        DiaryPage diary = mapper.toEntity(dto);
+
+        log.debug("Creating nested entities for diary page");
+        if (dto.getMedicines() != null) {
+            dto.getMedicines().forEach(m -> medicineMapper.toEntity(medicineService.create(m)));
+        }
+        if (dto.getUserSymptoms() != null) {
+            dto.getUserSymptoms().forEach(s -> symptomMapper.toEntity(symptomService.create(s)));
+        }
+        if (dto.getWeathers() != null) {
+            dto.getWeathers().forEach(w -> weatherMapper.toEntity(weatherService.create(w)));
+        }
+
+        diary = repository.save(diary);
+        log.info("DiaryPage created id={}", diary.getId());
+
+        checkAndSendToKafka(diary);
+        return mapper.toDto(diary);
     }
 
-    public Optional<DiaryPageDto> getById(UUID id) {
-        return repository.findById(id).map(mapper::toDto);
+    public DiaryPageDto getById(UUID id, UUID userId) {
+        log.info("Fetching diary page id={} for userId={}", id, userId);
+        validateUserExists(userId);
+
+        DiaryPage diary = repository.findById(id)
+                .orElseThrow(() -> {
+                    log.warn("DiaryPage not found id={}", id);
+                    return new NotFoundException("DiaryPage not found");
+                });
+
+        validateOwnership(userId, diary.getUserId());
+        log.debug("Ownership validated for diaryPageId={} and userId={}", id, userId);
+        String notes;
+        try {
+            notes = diary.getAiNotes();
+            log.debug("This diary page id={} has ai notes={}", diary.getId(), diary.getAiNotes());
+        } catch (Exception ex) {
+            log.error("DiaryPage not found for id={}", id, ex);
+        }
+        return mapper.toDto(diary);
     }
 
-    public Optional<DiaryPageDto> getByFullId(UUID id) {
-        return repository.findFullById(id).map(mapper::toDto);
-    }
+    public DiaryPageDto update(UUID id, DiaryPageDto dto, UUID userId) {
+        log.info("Updating diaryPage id={} by userId={}", id, userId);
+        validateUserExists(userId);
 
-    public List<DiaryPageDto> getAll() {
-        return repository.findAll().stream().map(mapper::toDto).toList();
-    }
+        DiaryPage diary = repository.findById(id)
+                .orElseThrow(() -> {
+                    log.warn("DiaryPage not found for update id={}", id);
+                    return new NotFoundException("DiaryPage not found");
+                });
 
-    public DiaryPageDto update(UUID id, DiaryPageDto dto) {
-        DiaryPage diary = findDiaryOrThrow(id);
-        diary.setUserId(dto.getUserId());
+        validateOwnership(userId, diary.getUserId());
+
         diary.setHealthState(dto.getHealthState());
         diary.setTimestamp(dto.getTimestamp());
         diary.setUserNotes(dto.getUserNotes());
-        DiaryPage updated = repository.save(diary);
-        checkAndSendToKafka(updated);
-        return mapper.toDto(updated);
+
+        diary = repository.save(diary);
+        log.info("DiaryPage updated id={}", id);
+
+        checkAndSendToKafka(diary);
+        return mapper.toDto(diary);
     }
 
-    public void delete(UUID id) {
-        if (!repository.existsById(id)) {
-            throw new NotFoundException("DiaryPage not found");
-        }
-        repository.deleteById(id);
+    public void delete(UUID id, UUID userId) {
+        log.info("Deleting diaryPage id={} by userId={}", id, userId);
+        validateUserExists(userId);
+
+        DiaryPage diary = repository.findById(id)
+                .orElseThrow(() -> {
+                    log.warn("DiaryPage not found for delete id={}", id);
+                    return new NotFoundException("DiaryPage not found");
+                });
+
+        validateOwnership(userId, diary.getUserId());
+
+        repository.delete(diary);
+        log.info("DiaryPage deleted id={}", id);
     }
 
-    public DiaryPageDto getByUserIdAndZonedDateTime(UUID userId, ZonedDateTime zonedDateTime) {
-        return repository.findByUserIdAndExactDay(userId, zonedDateTime)
-                .map(mapper::toDto)
-                .orElseThrow(() -> new NotFoundException("DiaryPage instance not found"));
+    public DiaryPageDto addMedicine(UUID diaryPageId, MedicineDto dto, UUID userId) {
+        log.info("Adding medicine to diaryPage id={} by userId={}", diaryPageId, userId);
+        return modifyWithOwnershipCheck(diaryPageId, userId, diary -> {
+            diary.getMedicines().add(
+                    medicineMapper.toEntity(medicineService.create(dto))
+            );
+            log.debug("Medicine added to diaryPage id={}", diaryPageId);
+        });
     }
 
-    public DiaryPageDto addMedicine(UUID diaryPageId, MedicineDto medicineDto) {
-        DiaryPage diary = repository.findFullById(diaryPageId)
-                .orElseThrow(() -> new NotFoundException("DiaryPage not found"));
-        MedicineDto saved = medicineService.create(medicineDto);
-        diary.getMedicines().add(medicineMapper.toEntity(saved));
-        DiaryPage updated = repository.save(diary);
-        checkAndSendToKafka(updated);
-        return mapper.toDto(updated);
+    public DiaryPageDto addSymptom(UUID diaryPageId, UserSymptomDto dto, UUID userId) {
+        log.info("Adding symptom to diaryPage id={} by userId={}", diaryPageId, userId);
+        return modifyWithOwnershipCheck(diaryPageId, userId, diary -> {
+            diary.getUserSymptoms().add(
+                    symptomMapper.toEntity(symptomService.create(dto))
+            );
+            log.debug("Symptom added to diaryPage id={}", diaryPageId);
+        });
     }
 
-    public DiaryPageDto addSymptom(UUID diaryPageId, UserSymptomDto symptomDto) {
-        DiaryPage diary = repository.findFullById(diaryPageId)
-                .orElseThrow(() -> new NotFoundException("DiaryPage not found"));
-        UserSymptomDto saved = symptomService.create(symptomDto);
-        diary.getUserSymptoms().add(symptomMapper.toEntity(saved));
-        DiaryPage updated = repository.save(diary);
-        checkAndSendToKafka(updated);
-        return mapper.toDto(updated);
+    public DiaryPageDto addWeather(UUID diaryPageId, WeatherDto dto, UUID userId) {
+        log.info("Adding weather to diaryPage id={} by userId={}", diaryPageId, userId);
+        return modifyWithOwnershipCheck(diaryPageId, userId, diary -> {
+            diary.getWeathers().add(
+                    weatherMapper.toEntity(weatherService.create(dto))
+            );
+            log.debug("Weather added to diaryPage id={}", diaryPageId);
+        });
     }
 
-    public DiaryPageDto addWeather(UUID diaryPageId, WeatherDto weatherDto) {
-        DiaryPage diary = repository.findFullById(diaryPageId)
-                .orElseThrow(() -> new NotFoundException("DiaryPage not found"));
-        WeatherDto saved = weatherService.create(weatherDto);
-        diary.getWeathers().add(weatherMapper.toEntity(saved));
-        DiaryPage updated = repository.save(diary);
-        checkAndSendToKafka(updated);
-        return mapper.toDto(updated);
+    public DiaryPageDto getByUserAndDay(UUID userId, ZonedDateTime timestamp) {
+        log.info("Fetching diary page for userId={} on day={}", userId, timestamp.toLocalDate());
+        validateUserExists(userId);
+
+        LocalDate day = timestamp.withZoneSameInstant(ZoneId.systemDefault()).toLocalDate();
+
+        DiaryPage diary = repository.findByUserIdAndExactDay(userId, ZonedDateTime.from(day))
+                .orElseThrow(() -> {
+                    log.warn("DiaryPage not found for userId={} on day={}", userId, day);
+                    return new NotFoundException("DiaryPage not found for the specified day");
+                });
+
+        validateOwnership(userId, diary.getUserId());
+
+        log.debug("DiaryPage found id={} for userId={} on day={}", diary.getId(), userId, day);
+        return mapper.toDto(diary);
     }
 
-    public DiaryPage updateUserNote(UUID userId, String userNotes, UUID diaryPageId) {
+    public AiNotesDto getAiNotes(UUID diaryPageId, UUID userId) {
+        log.info("Fetching AI notes for diaryPage id={} by userId={}", diaryPageId, userId);
+        validateUserExists(userId);
+
         DiaryPage diary = repository.findById(diaryPageId)
-                .orElseThrow(() -> new NotFoundException("DiaryPage not found"));
-        diary.setUserNotes(userNotes);
-        DiaryPage entity = repository.save(diary);
-        checkAndSendToKafka(entity);
-        return entity;
+                .orElseThrow(() -> {
+                    log.warn("DiaryPage not found id={}", diaryPageId);
+                    return new NotFoundException("DiaryPage not found");
+                });
+
+        validateOwnership(userId, diary.getUserId());
+        log.debug("Ownership validated for diaryPageId={} and userId={}", diaryPageId, userId);
+
+        String notes = diary.getAiNotes();
+        log.debug("AI notes fetched for diaryPageId={} length={}",
+                diaryPageId,
+                notes != null ? notes.length() : 0
+        );
+
+        return new AiNotesDto(diaryPageId, notes);
     }
 
-    private DiaryPage findDiaryOrThrow(UUID id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new NotFoundException("DiaryPage not found"));
+
+    private void validateUserExists(UUID userId) {
+        log.debug("Validating user existence userId={}", userId);
+        try {
+            userClient.getById(userId);
+        } catch (Exception e) {
+            log.warn("User not found userId={}", userId);
+            throw new NotFoundException("User not found");
+        }
     }
 
-    private boolean isDiaryComplete(DiaryPage diary) {
-        if (diary.getHealthState() == null) return false;
-        if (diary.getUserSymptoms() == null || diary.getUserSymptoms().isEmpty()) return false;
-        return diary.getWeathers() != null && !diary.getWeathers().isEmpty();
+    private void validateOwnership(UUID userId, UUID ownerId) {
+        if (!userId.equals(ownerId)) {
+            log.warn("User {} attempted to modify diary owned by {}", userId, ownerId);
+            throw new NotFoundException("Forbidden: User does not own this diary page");
+        }
+        log.debug("User {} ownership validated", userId);
+    }
+
+    private DiaryPageDto modifyWithOwnershipCheck(
+            UUID id,
+            UUID userId,
+            java.util.function.Consumer<DiaryPage> action
+    ) {
+        log.debug("Modifying diaryPage id={} by userId={}", id, userId);
+
+        validateUserExists(userId);
+
+        DiaryPage diary = repository.findById(id)
+                .orElseThrow(() -> {
+                    log.warn("DiaryPage not found id={}", id);
+                    return new NotFoundException("DiaryPage not found");
+                });
+
+        validateOwnership(userId, diary.getUserId());
+
+        action.accept(diary);
+        diary = repository.save(diary);
+
+        log.info("DiaryPage updated id={} after modification", id);
+
+        checkAndSendToKafka(diary);
+        return mapper.toDto(diary);
     }
 
     private void checkAndSendToKafka(DiaryPage diary) {
-        if (isDiaryComplete(diary)) {
-            log.info("DiaryPage id={} is complete, sending to Kafka", diary.getId());
+        log.debug("Checking if diaryPage id={} should be sent to Kafka", diary.getId());
+
+        if (diary.getHealthState() != null &&
+                !diary.getUserSymptoms().isEmpty() &&
+                !diary.getWeathers().isEmpty()) {
+
+            log.info("Sending DiaryPage id={} to Kafka", diary.getId());
 
             DiaryNoteMessage message = new DiaryNoteMessage(
                     diary.getUserId(),
@@ -150,10 +262,6 @@ public class DiaryPageService {
             );
 
             diaryNoteService.sendNoteMessage(message);
-        } else {
-            log.info("DiaryPage id={} is not complete, skipping Kafka send", diary.getId());
         }
     }
-
-
 }

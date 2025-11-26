@@ -2,6 +2,19 @@ spring:
   application:
     name: gigachat-api-server
 
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://postgres:5432/diary_db
+    username: postgres
+    password: postgres
+
+  sql:
+    init:
+      mode: always
+
+  kafka:
+    bootstrap-servers: kafka:9092
+
 gigachat:
   auth-key: MDE5YThlMjctNDJiMS03NzRjLWE4ZDAtMzM2NzEwMWFmNTAxOmQ0YzRhZmY3LTc2MWMtNGQxMC1hYzU3LTE5MGNjNDgzODNiMg==
 

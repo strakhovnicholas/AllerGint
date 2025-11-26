@@ -3,9 +3,9 @@ package org.allergint.gigachatproxy.kafka.consumer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.allergint.gigachatproxy.kafka.KafkaConfig;
-import org.allergint.gigachatproxy.kafka.payload.AiDiaryNoteResponse;
-import org.allergint.gigachatproxy.kafka.payload.DiaryNoteMessage;
 import org.allergint.gigachatproxy.service.GigaChatService;
+import org.allergit.diary.kafka.AiDiaryNoteResponse;
+import org.allergit.diary.kafka.DiaryNoteMessage;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,10 @@ public class DiaryNoteConsumer {
     private final GigaChatService aiService;
     private final KafkaTemplate<String, AiDiaryNoteResponse> kafkaTemplate;
 
-    @KafkaListener(topics = KafkaConfig.DIARY_NOTES_TOPIC, groupId = "diary-note-group")
+    @KafkaListener(topics = KafkaConfig.DIARY_NOTES_TOPIC,
+            groupId = "diary-note-group",
+            containerFactory = "diaryNoteKafkaListenerFactory"
+    )
     public void consume(DiaryNoteMessage message) {
         log.info("Received DiaryNoteMessage={}", message);
 
@@ -51,7 +54,12 @@ public class DiaryNoteConsumer {
             );
         }
 
-        prompt.append("\nОпредели возможные аллергические риски и дай рекомендации.\n");
+        prompt.append("""
+                Определи возможные аллергические риски и дай рекомендации.\
+                Ответ пиши на русском языке. Все технические данные из json убери.\
+                Пиши ответ без вступления. Старайся уложиться в 500 символов, лимит 2000.\
+                Пиши приличным языком\s
+                """);
 
         var aiResponse = aiService.sendPrompt(prompt.toString());
 
