@@ -1,7 +1,7 @@
 package org.allergit.kafka.service;
 
 import lombok.RequiredArgsConstructor;
-import org.allergit.kafka.payload.DiaryNoteMessage;
+import org.allergit.diary.kafka.DiaryNoteMessage;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
