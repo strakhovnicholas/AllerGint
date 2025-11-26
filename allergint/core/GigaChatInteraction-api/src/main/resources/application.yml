@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: GigaChatInteraction-api
+  cloud:
+    config:
+      uri: http://config-server:8888
+      fail-fast: true
+      retry:
+        use-random-policy: true
+        max-interval: 6000
+    import-check:
+      enabled: false
+  config:
+    import: "configserver:"
+
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://discovery-server:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${random.value}
+    lease-renewal-interval-in-seconds: 10
+    hostname: localhost
+    prefer-ip-address: true
+
+server:
+  port: 8083

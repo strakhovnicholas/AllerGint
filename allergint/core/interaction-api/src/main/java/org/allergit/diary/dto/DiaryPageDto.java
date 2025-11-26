@@ -21,4 +21,5 @@ public class DiaryPageDto implements Serializable {
     Set<WeatherDto> weathers;
     @Length(message = "Too much characters", max = 1000)
     String userNotes;
+    String aiNotes;
 }

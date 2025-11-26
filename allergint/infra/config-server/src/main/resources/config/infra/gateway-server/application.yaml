@@ -2,16 +2,27 @@ server:
   port: 8080
 
 spring:
+  application:
+    name: GATEWAY-SERVICE
   webflux:
     resources:
       add-mappings: false
 
   cloud:
+    config:
+      uri: http://config-server:8888
+      fail-fast: true
+      retry:
+        use-random-policy: true
+        max-interval: 6000
+    import-check:
+      enabled: false
+
     gateway:
       discovery:
         locator:
           enabled: true
-      routes:
+          lower-case-service-id: true
 
 management:
   endpoint:
@@ -30,3 +41,10 @@ logging:
     org.springframework.boot.actuate.endpoint.web.servlet: DEBUG
     org.springframework.boot.actuate: DEBUG
     reactor.netty: DEBUG
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery-server:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true

@@ -11,6 +11,7 @@
 
     <artifactId>core</artifactId>
 
+
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
@@ -22,6 +23,8 @@
         <module>interaction-api</module>
         <module>user-service</module>
         <module>diary-service</module>
+        <module>GigaChatInteraction-api</module>
+        <module>weather-service</module>
     </modules>
 
 </project>

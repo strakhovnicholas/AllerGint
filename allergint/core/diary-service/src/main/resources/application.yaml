@@ -3,13 +3,13 @@ spring:
     name: diary-service
   cloud:
     config:
-      discovery:
-        enabled: true
-        service-id: config-server
+      uri: http://config-server:8888
       fail-fast: true
       retry:
         use-random-policy: true
         max-interval: 6000
+    import-check:
+      enabled: false
   config:
     import: "configserver:"
 
@@ -18,9 +18,12 @@ eureka:
     healthcheck:
       enabled: true
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://discovery-server:8761/eureka/
   instance:
     instance-id: ${spring.application.name}:${random.value}
     lease-renewal-interval-in-seconds: 10
     hostname: localhost
     prefer-ip-address: true
+
+server:
+  port: 8082

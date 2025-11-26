@@ -6,8 +6,11 @@ import lombok.Getter;
 import lombok.Setter;
 import org.allergit.diary.enums.DoseMeasureType;
 import org.allergit.diary.enums.MedicineType;
+import org.allergit.diarypage.entity.DiaryPage;
 import org.hibernate.proxy.HibernateProxy;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -29,6 +32,14 @@ public class Medicine {
 
     @NotNull
     private Double dose;
+
+    @ManyToMany
+    @JoinTable(
+            name = "diary_medicine",
+            joinColumns = @JoinColumn(name = "medicine_id"),
+            inverseJoinColumns = @JoinColumn(name = "diary_id")
+    )
+    private Set<DiaryPage> diaryPages = new LinkedHashSet<>();
 
     @Enumerated(EnumType.STRING)
     private DoseMeasureType doseMeasureType;

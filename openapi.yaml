@@ -1,0 +1,280 @@
+openapi: 3.1.0
+info:
+  title: Allergit API
+  version: 1.0.0
+  description: API spec for diary and user services accessible via the gateway
+
+servers:
+  - url: https://localhost:8080
+
+paths:
+  /api/diary:
+    post:
+      summary: Create a new diary page
+      parameters:
+        - in: header
+          name: X-User-Id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DiaryPageDto'
+      responses:
+        '200':
+          description: Created diary page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiaryPageDto'
+
+  /api/diary/day:
+    get:
+      summary: Get diary page for a specific day
+      parameters:
+        - in: header
+          name: X-User-Id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: timestamp
+          required: true
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: Diary page for the given day
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiaryPageDto'
+
+  /api/diary/{id}:
+    get:
+      summary: Get diary page by ID
+      parameters:
+        - in: header
+          name: X-User-Id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Diary page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiaryPageDto'
+    patch:
+      summary: Update diary page
+      parameters:
+        - in: header
+          name: X-User-Id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DiaryPageDto'
+      responses:
+        '200':
+          description: Updated diary page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiaryPageDto'
+    delete:
+      summary: Delete diary page
+      parameters:
+        - in: header
+          name: X-User-Id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Diary page deleted
+
+  /api/diary/{id}/ai-notes:
+    get:
+      summary: Get AI notes for a diary page
+      parameters:
+        - in: header
+          name: X-User-Id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: AI notes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiNotesDto'
+
+  /api/diary/{id}/medicine:
+    post:
+      summary: Add medicine to diary page
+      parameters:
+        - in: header
+          name: X-User-Id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MedicineDto'
+      responses:
+        '200':
+          description: Updated diary page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiaryPageDto'
+
+  /api/diary/{id}/symptom:
+    post:
+      summary: Add symptom to diary page
+      parameters:
+        - in: header
+          name: X-User-Id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSymptomDto'
+      responses:
+        '200':
+          description: Updated diary page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiaryPageDto'
+
+  /api/diary/{id}/weather:
+    post:
+      summary: Add weather info to diary page
+      parameters:
+        - in: header
+          name: X-User-Id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WeatherDto'
+      responses:
+        '200':
+          description: Updated diary page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiaryPageDto'
+
+components:
+  schemas:
+    DiaryPageDto:
+      type: object
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        healthState:
+          type: string
+        userNotes:
+          type: string
+        medicines:
+          type: array
+          items:
+            $ref: '#/components/schemas/MedicineDto'
+        userSymptoms:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSymptomDto'
+        weathers:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeatherDto'
+    AiNotesDto:
+      type: object
+      properties:
+        aiNotes:
+          type: string
+    MedicineDto:
+      type: object
+      properties:
+        name:
+          type: string
+        dosage:
+          type: string
+    UserSymptomDto:
+      type: object
+      properties:
+        symptom:
+          type: string
+        severity:
+          type: string
+    WeatherDto:
+      type: object
+      properties:
+        temperature:
+          type: number
+        condition:
+          type: string
