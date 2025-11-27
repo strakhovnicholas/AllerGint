@@ -94,6 +94,7 @@ h5 {
   font: var(--font-main);
   font-size: 1.4rem;
   font-weight: 600;
+  color: var(--dark-color);
 }
 
 .headerSubtitle {

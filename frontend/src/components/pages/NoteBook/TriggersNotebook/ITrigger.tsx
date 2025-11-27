@@ -4,5 +4,5 @@ export interface TriggerCard {
   icon?: string
   color?: string
 
-  isActive?: boolean
+  isActive?: string
 }
