@@ -24,6 +24,7 @@
   --gray-color: rgb(156, 163, 175);
   --gray-bg-color: rgba(156, 163, 175, 0.3);
   --gray-smooth-color: #4b5563;
+  --gray-card-bg-color: #f9fafb;
 
   --font-main: ui-sans-serif, system-ui, sans-serif, Apple Color Emoji,
     Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
