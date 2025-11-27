@@ -1,9 +1,10 @@
-import { useState } from 'react'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { useEffect, useState } from 'react'
+import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import style from './MapMap.module.css'
 import ConcentrationDataMap from '../ConcentrationMap/ConcentrationDataMap'
+import { getAddressFromCoords } from '../../../../utils/getAdressFromCoords'
 
 // Настройка иконок для маркеров
 delete (L.Icon.Default.prototype as any)._getIconUrl
@@ -16,9 +17,34 @@ L.Icon.Default.mergeOptions({
       'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 })
 
+interface adress {
+   country: string
+   city: string
+   fullAddress: string
+}
+
 function MapMap() {
    const [zoom, setZoom] = useState(10)
-   const [center, setCenter] = useState<[number, number]>([55.7558, 37.6176]) // Москва по умолчанию
+   const [center, setCenter] = useState<[number, number]>([55.7558, 37.6176])
+
+   const [adress, setAdress] = useState<adress | null>(null)
+
+   useEffect(() => {
+      navigator.geolocation.getCurrentPosition(
+         async (position) => {
+            setCenter([position.coords.latitude, position.coords.longitude])
+            setAdress(
+               await getAddressFromCoords(
+                  position.coords.latitude,
+                  position.coords.longitude
+               )
+            )
+         },
+         (error) => {
+            console.error('Error getting location:', error)
+         }
+      )
+   }, [])
 
    const handleZoomIn = () => {
       if (zoom < 18) {
@@ -48,15 +74,27 @@ function MapMap() {
                attribution='© <a href="https://carto.com/attributions">CARTO</a>'
                url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
             />
+
+            <Circle
+               center={center}
+               radius={1000}
+               pathOptions={{
+                  color: '#2563eb',
+                  fillColor: '#3b82f6',
+                  fillOpacity: 0.2,
+                  weight: 0.7,
+               }}
+            />
+
             <Marker position={center}>
                <Popup>
-                  Центр карты
+                  Ваше местоположение
                   <br />
-                  Москва, Россия
+                  {adress
+                     ? `${adress.country}, ${adress.city}`
+                     : 'Геокоординаты недоступны'}
                </Popup>
             </Marker>
-
-            {/* Компонент отображения концентрации пыльцы */}
             <ConcentrationDataMap />
          </MapContainer>
 
@@ -81,7 +119,6 @@ function MapMap() {
 
          <div className={style.zoomLevel}>Масштаб: {zoom}</div>
 
-         {/* Белый прямоугольник для скрытия атрибуции Leaflet */}
          <div className={style.attributionCover}></div>
       </div>
    )
