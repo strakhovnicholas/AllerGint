@@ -5,9 +5,7 @@ function MedProfile() {
       { type: 'Полынь', level: 1 },
       { type: 'Берёза', level: 2 },
       { type: 'Дуб', level: 3 },
-      { type: 'Полынь', level: 1 },
-      { type: 'Полынь', level: 1 },
-      { type: 'Полынь', level: 1 },
+      { type: 'Кошки', level: 1 },
    ]
 
    const months = ['январь', 'февраль', 'март']

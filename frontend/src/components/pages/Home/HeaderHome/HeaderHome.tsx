@@ -32,9 +32,8 @@ function HeaderHome() {
                   return response.json()
                })
                .then((data) => {
-                  console.log(data)
                   setCard({
-                     town: data.timezone.split('/')[1], // Здесь можно использовать данные из ответа
+                     town: data.timezone.split('/')[1],
                      temp: data.current_weather.temperature,
                      weather: getWeatherDescription(
                         data.current_weather.weathercode
