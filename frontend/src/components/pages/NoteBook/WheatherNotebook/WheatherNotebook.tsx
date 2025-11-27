@@ -25,7 +25,6 @@ function WheatherNotebook() {
                   return response.json()
                })
                .then((data) => {
-                  console.log(data)
                   setCard({
                      temperature: data.current_weather.temperature + 'C°',
                      wind: data.current_weather.windspeed,
