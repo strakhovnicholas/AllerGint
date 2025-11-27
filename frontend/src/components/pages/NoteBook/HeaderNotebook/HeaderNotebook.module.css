@@ -1,0 +1,87 @@
+.header {
+   padding: 48px 16px;
+   background-color: var(--blue-color);
+   color: var(--light-color);
+   display: grid;
+   gap: 24px;
+}
+
+.headerTitle {
+   width: 290px;
+   display: flex;
+   align-items: center;
+   justify-content: space-evenly;
+   font-size: 20px;
+}
+
+.headerTitleLink {
+   display: flex;
+   align-items: center;
+}
+
+.headerTitleLinkSvg {
+   color: var(--light-color);
+   transform: rotate(180deg);
+}
+
+.headerTitleBtn {
+   width: 32px;
+   height: 40px;
+   color: var(--light-color);
+   background-color: var(--blue-header-color);
+   border-radius: 0.5rem;
+}
+
+.headerCalendarDay {
+   display: grid;
+   grid-template-columns: min-content 1fr min-content;
+   justify-content: center;
+   width: 100%;
+   padding: 0.75rem;
+   background-color: var(--blue-header-color);
+   border-radius: 0.5rem;
+}
+
+.headerCalendarDayTitle {
+   font-size: 16px;
+   line-height: 16px;
+   font-family: var(--font-main);
+   font-weight: 500;
+}
+
+.headerCalendarDayTitles {
+   display: grid;
+   justify-content: center;
+   height: 44px;
+}
+
+.headerCalendarDayBtn {
+   color: var(--light-color);
+}
+
+.headerCalendarDayItems {
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   gap: 5%;
+   margin-top: 1rem;
+}
+
+.headerCalendarDayItem {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+
+   height: 72px;
+   padding: 0.75rem;
+   border-radius: 0.5rem;
+
+   background-color: var(--blue-header-color);
+}
+
+.headerCalendarDaySubtitle {
+   margin: auto;
+}
+
+.headerCalendarDaySubtitle::first-letter {
+   text-transform: capitalize;
+}

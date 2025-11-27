@@ -1,0 +1,61 @@
+.title {
+  font: var(--font-main);
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.healthWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.healthNotebookTitle {
+  margin-bottom: 12px;
+}
+
+.healthNotebookBtnsTitles {
+  display: flex;
+  justify-content: space-between;
+  color: var(--gray-smooth-color);
+  font-size: 1.1rem;
+  line-height: 1.25rem;
+}
+
+.healthNotebookBtns {
+  display: flex;
+  justify-content: space-around;
+}
+
+.healthNotebookBtn {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.worse {
+  background: var(--primary-color);
+}
+.bad {
+  background: var(--orange-color);
+}
+.normal {
+  background: var(--yellow-color);
+}
+.good {
+  background: #afe366;
+}
+.best {
+  background: var(--green-color);
+}
+
+.healthNotebookBtnsSubTitles {
+  margin: 0 auto;
+  color: var(--gray-smooth-color);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.healthNotebookBtnsRes {
+  color: #afe366;
+}
