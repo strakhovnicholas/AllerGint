@@ -1,22 +1,63 @@
 .footer {
-   border: 1px solid var(--gray-color);
-   color: var(--gray-color);
-   position: fixed;
-   bottom: 0;
-   width: 100%;
-
-   backdrop-filter: blur(8px);
-   -webkit-backdrop-filter: blur(8px);
-   background: rgba(255, 255, 255, 0.6);
-
-   z-index: 1000;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.85);
+    border-top: 1px solid #ddd;
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: center;
 }
 
 .footerWrapper {
-   color: var(--gray-color);
+    max-width: 500px;
+    width: 100%;
 }
 
 .footerWrapperList {
-   display: flex;
-   justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footerButton {
+    flex: 1;
+    padding: 0.6rem 0;
+    background: linear-gradient(135deg, #4a90e2, #0077cc);
+    color: #fff;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-align: center;
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.footerButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.footerButton:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    opacity: 0.9;
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 400px) {
+    .footerWrapperList {
+        flex-direction: column;
+    }
+    .footerButton {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
 }

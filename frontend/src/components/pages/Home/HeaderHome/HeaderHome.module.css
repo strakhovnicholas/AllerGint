@@ -4,16 +4,16 @@
    color: var(--light-color);
    display: flex;
    align-items: center;
-   flex-direction: column;
    gap: 2em;
+    margin-bottom: 50px;
 }
 
 .headerTitle {
-   display: flex;
-   align-items: center;
-   font-size: 16px;
-   justify-content: space-between;
-   gap: 1em;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 26px;
+    padding-left: 35px;
 }
 
 .headerTitleAvatar {
@@ -24,14 +24,12 @@
 
 .headerTitleTitle {
    font: var(--font-main);
-   font-size: 1.2rem;
    font-weight: 700;
    flex-wrap: wrap;
 }
 
 .headerTitleDescription {
    font: var(--font-main);
-   font-size: 1em;
    font-weight: 500;
    color: var(--blue-smooth-color);
 }

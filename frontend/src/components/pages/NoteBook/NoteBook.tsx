@@ -14,7 +14,6 @@ function Notebook() {
       <HeaderNotebook></HeaderNotebook>
       <HealthNotebook></HealthNotebook>
       <SymptomNotebook></SymptomNotebook>
-      <TriggersNotebook></TriggersNotebook>
       <PillsNotebook></PillsNotebook>
       <WheatherNotebook></WheatherNotebook>
       <NotesNotebook></NotesNotebook>

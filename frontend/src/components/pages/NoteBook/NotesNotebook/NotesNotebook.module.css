@@ -1,70 +1,113 @@
 .cardNotes {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 1.5rem 2rem;
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cardNotes:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
 }
 
 .notesTitle {
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #222;
 }
 
 .notesList {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .noteListItem {
-  padding: 0.5rem;
-  background-color: var(--gray-card-bg-color);
-  border-radius: 0.75rem;
+    padding: 0.75rem 1rem;
+    background-color: #fefefe;
+    border-radius: 0.85rem;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.noteListItem:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
 }
 
 .noteSubtitle {
-  margin-top: 0.2rem;
-  font-size: 0.75rem;
-  color: var(--gray-color);
+    margin-top: 0.3rem;
+    font-size: 0.75rem;
+    color: #777;
 }
 
 .noteWrite {
-  min-height: 1rem;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
 }
 
 .noteInput {
-  resize: vertical;
-  font-size: 0.875rem;
-  max-width: 100%;
-  min-height: 4rem;
-  padding: 0.75rem;
-  border: 1px solid var(--gray-color);
-  border-radius: 0.75rem;
+    resize: vertical;
+    font-size: 0.9rem;
+    max-width: 100%;
+    min-height: 4.5rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.85rem;
+    background-color: #fafafa;
+    transition: border 0.3s, box-shadow 0.3s;
 }
 
 .noteInput:focus {
-  outline: none;
-}
-.noteListSub span {
-  /* Стили для текста "saved time" внутри подписи */
+    outline: none;
+    border-color: #0077cc;
+    box-shadow: 0 0 6px rgba(0, 119, 204, 0.3);
 }
 
-.noteKeyboard textarea:focus {
-  /* Стили для поля ввода в состоянии фокуса */
+.noteListSub span {
+    font-weight: 500;
+    color: #0077cc;
+    font-size: 0.85rem;
 }
 
 .noteAddBtn {
-  transition: all ease 0.6s;
-  background-color: var(--blue-color);
-  color: var(--light-color);
-  padding: 1rem;
-  border-radius: 0.75rem;
-  width: 100%;
+    transition: all ease 0.4s;
+    background-color: #0077cc;
+    color: #fff;
+    padding: 0.9rem;
+    border-radius: 1rem;
+    width: 100%;
+    font-weight: 600;
+    cursor: pointer;
 }
+
 .noteAddBtn:hover {
-  background-color: var(--blue-smooth-color);
+    background-color: #3399ff;
 }
 
 .noteAddBtn:active {
-  /* Стили для кнопки при нажатии */
+    transform: scale(0.98);
+    opacity: 0.8;
+}
+
+/* Адаптив */
+@media (max-width: 600px) {
+    .cardNotes {
+        padding: 1rem 1rem;
+    }
+
+    .noteInput {
+        min-height: 4rem;
+    }
+
+    .notesTitle {
+        font-size: 1.25rem;
+    }
 }

@@ -1,0 +1,18 @@
+.homeContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.actions {
+  /* Platz für ActionsHome */
+}
+
+.schedule {
+  /* Platz für ScheduleHome */
+}
+
+.recomendations {
+  /* Damit RecomendationsHome korrekt gerendert wird */
+}

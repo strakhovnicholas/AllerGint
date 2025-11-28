@@ -1,53 +1,69 @@
 import { useEffect, useState } from 'react'
 import style from './RecomendationsHome.module.css'
 
-interface Joke {
-   setup: string
-   punchline: string
-   // id: number
-   type: string
+interface AiNotesDto {
+  id: string
+  aiNotes: string
 }
 
+const userId = 'b1d60e91-97e6-4659-ae7f-bde6808e2c4c'
+const diaryPageId = 'e37b563d-6cd0-495f-8492-b244c89a993f'
+
 function RecomendationsHome() {
-   const [joke, setJoke] = useState<Joke | null>(null)
+  const [aiNotes, setAiNotes] = useState<AiNotesDto | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
-   useEffect(() => {
-      fetch('https://official-joke-api.appspot.com/random_joke')
-         .then((response) => response.json())
-         .then((data) => {
-            setJoke({
-               setup: data.setup,
-               punchline: data.punchline,
-               // id: data.id,
-               type: data.type,
-            })
-         })
-         .catch((error) => console.error(error))
-   }, [])
+  useEffect(() => {
+    const fetchAiNotes = async () => {
+      try {
+        setLoading(true)
+        setError(null)
 
-   return (
-      <div className="card first">
-         <div className="title">Рекомендации на сегодня</div>
+        const res = await fetch(
+          `http://localhost:8080/api/diary/${diaryPageId}/ai-notes`,
+          {
+            method: 'GET',
+            headers: {
+              'X-User-Id': userId
+            }
+          }
+        )
 
-         <div className={style.recomendations}>
-            {/* {joke ? (
-               <>
-                  <p>{joke.setup}</p>
-                  <p>{joke.punchline}</p>
-               </>
-            ) : (
-               <p>Загрузка шутки...</p>
-            )} */}
-            Проветривайте квартиру - пыльцы нет, но нужен свежий воздух<br></br>
-            Делайте влажную уборку - актуально для домашней пыли и клещей
-            <br></br>
-            Чистите верхнюю одежду - на ней скапливаются уличные аллергены
-            <br></br>
-            Подготовьте аптечку к сезону - проверьте сроки антигистаминных
-            <br></br>
-         </div>
+        if (!res.ok) {
+          throw new Error(`Error ${res.status}: ${res.statusText}`)
+        }
+
+        const data: AiNotesDto = await res.json()
+        setAiNotes(data)
+      } catch (err: any) {
+        console.error(err)
+        setError(err.message)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchAiNotes()
+  }, [])
+
+  return (
+    <div className="card first">
+      <div className="title">Рекомендации на сегодня</div>
+
+      <div className={style.recomendations}>
+        {loading ? (
+          <p>Загрузка рекомендаций...</p>
+        ) : error ? (
+          <p style={{ color: 'red' }}>{error}</p>
+        ) : aiNotes?.aiNotes ? (
+          aiNotes.aiNotes.split('\n').map((line, index) => <p key={index}>{line}</p>)
+        ) : (
+          <p>Нет рекомендаций на сегодня</p>
+        )}
       </div>
-   )
+    </div>
+  )
 }
 
 export default RecomendationsHome

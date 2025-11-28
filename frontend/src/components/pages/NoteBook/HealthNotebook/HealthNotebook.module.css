@@ -1,61 +1,55 @@
-.title {
-  font: var(--font-main);
-  font-size: 1.4rem;
-  font-weight: 600;
+.cardHealth {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 1.5rem 2rem;
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.healthWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.cardHealth:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
 }
 
-.healthNotebookTitle {
-  margin-bottom: 12px;
+.healthTitle {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #222;
 }
 
-.healthNotebookBtnsTitles {
-  display: flex;
-  justify-content: space-between;
-  color: var(--gray-smooth-color);
-  font-size: 1.1rem;
-  line-height: 1.25rem;
+.healthButtons {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
 }
 
-.healthNotebookBtns {
-  display: flex;
-  justify-content: space-around;
+.healthBtn {
+    padding: 0.55rem 0.9rem;
+    border-radius: 0.65rem;
+    border: 1px solid #d0d0d0;
+    background: #f7f7f7;
+    color: #777;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.healthNotebookBtn {
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
+.healthBtn:hover {
+    background-color: #0077cc;
+    color: #fff;
+    box-shadow: 0 3px 8px rgba(0, 119, 204, 0.2);
 }
 
-.worse {
-  background: var(--primary-color);
-}
-.bad {
-  background: var(--orange-color);
-}
-.normal {
-  background: var(--yellow-color);
-}
-.good {
-  background: #afe366;
-}
-.best {
-  background: var(--green-color);
+.healthBtnActive {
+    background-color: #0077cc;
+    color: #fff;
+    box-shadow: 0 3px 8px rgba(0, 119, 204, 0.25);
 }
 
-.healthNotebookBtnsSubTitles {
-  margin: 0 auto;
-  color: var(--gray-smooth-color);
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-.healthNotebookBtnsRes {
-  color: #afe366;
+.healthTimestamp {
+    font-size: 0.875rem;
+    color: #999;
 }

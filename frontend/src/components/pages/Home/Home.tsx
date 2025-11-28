@@ -2,23 +2,22 @@ import ActionsHome from './ActionsHome/ActionsHome'
 import HeaderHome from './HeaderHome/HeaderHome'
 import style from './Home.module.css'
 import RecomendationsHome from './RecomendationsHome/RecomendationsHome'
-import ScheduleHome from './ScheduleHome/ScheduleHome'
+
+interface HomeProps {
+    userId: string
+    diaryPageId: string
+}
 
 function Home() {
-   return (
-      <div>
-         <HeaderHome />
-         {/* <div className={style.actions}>
-            <ActionsHome />
-         </div>
-         <div className={style.schedule}>
-            <ScheduleHome />
-         </div> */}
-         <div className={style.recomendations}>
-            <RecomendationsHome />
-         </div>
-      </div>
-   )
+    return (<div className={style.homeContainer}>
+        <HeaderHome/>
+        <div className={style.recomendations}>
+            <RecomendationsHome/>
+        </div>
+        <div className={style.actions}>
+            <ActionsHome/>
+        </div>
+    </div>)
 }
 
 export default Home

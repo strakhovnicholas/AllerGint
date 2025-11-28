@@ -1,29 +1,58 @@
+.cardProfile {
+    background-color: #fff;
+    border-radius: 1rem;
+    padding: 1.8rem 2rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    max-width: 450px;
+    margin: 2.5rem auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cardProfile:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+}
+
+.title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 2px;
+    padding-left: 30px;
+}
+
 .data {
-   padding-left: 1rem;
+    padding-left: 1rem;
+    margin: 0;
 }
 
 .data > li {
-   font: var(--fomt-main);
-   font-size: 1rem;
-   line-height: 1.4;
-   text-decoration-style: dashed;
-   list-style: circle;
+    font: var(--font-main);
+    font-size: 1rem;
+    line-height: 1.5;
+    list-style: disc;
+    margin-bottom: 0.7rem;
+    color: #555;
 }
 
 .edit {
-   width: 100%;
-   height: 100%;
-   padding: 0.5rem 1rem;
-   margin-top: 1rem;
-   background-color: var(--blue-color);
-   color: var(--light-color);
-   border-radius: 1rem;
-   font-size: 1rem;
+    width: 100%;
+    padding: 0.6rem 1rem;
+    margin-top: 1.2rem;
+    background-color: var(--blue-color);
+    color: var(--light-color);
+    border-radius: 1rem;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+}
 
-   transition: ease-out 0.5s;
+.edit:hover {
+    opacity: 0.95;
 }
 
 .edit:active {
-   box-shadow: 0 0 10px 2px black;
-   opacity: 0.6;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
+    opacity: 0.7;
 }
