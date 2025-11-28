@@ -19,6 +19,22 @@ spring:
       enabled: false
 
     gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+              - PATCH
+            allowedHeaders:
+              - X-User-Id
+              - Content-Type
+              - Authorization
+            allowCredentials: true
       routes:
         - id: user-service
           uri: lb://user-service

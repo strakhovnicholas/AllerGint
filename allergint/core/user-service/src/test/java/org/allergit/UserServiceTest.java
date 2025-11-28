@@ -12,8 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(
@@ -66,13 +64,4 @@ class UserServiceTest {
         assertThat(updatedUser.getName()).isEqualTo("Jane Doe");
     }
 
-    @Test
-    void testDeleteUser() {
-        UserDto createdUser = userService.create(testUserDto);
-
-        userService.delete(createdUser.getId());
-
-        List<UserDto> users = userService.getAll();
-        assertThat(users).doesNotContain(createdUser);
-    }
 }

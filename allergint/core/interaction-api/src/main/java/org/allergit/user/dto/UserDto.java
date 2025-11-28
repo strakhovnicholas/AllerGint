@@ -8,27 +8,36 @@ import lombok.Data;
 import org.allergit.user.enums.UserRole;
 
 import java.io.Serializable;
+import java.util.Set;
 import java.util.UUID;
 
-/**
- * DTO for {@link org.allergit.entity.User}
- */
 @Data
 public class UserDto implements Serializable {
     UUID id;
-    @NotBlank(message = "Name cannot be blank!")
+
+    @NotBlank
     String name;
-    @NotNull(message = "Age cannot be null!")
-    @Min(message = "Age should be greater than 12!", value = 12)
-    @Max(message = "Age should be smaller than 100!", value = 99)
+
+    @NotNull
+    @Min(value = 12, message = "Age should be greater than 12!")
+    @Max(value = 99, message = "Age should be smaller than 100!")
     Integer age;
-    @NotBlank(message = "Gender cannot be blank!")
+
+    @NotBlank
     String gender;
-    @NotBlank(message = "Email cannot be blank!")
+
+    @NotBlank
     String email;
-    @NotBlank(message = "Password cannot be blank!")
+
+    @NotBlank
     String password;
-    @NotNull(message = "User role cannot be null")
+
+    @NotNull
     UserRole role;
+
     UUID diaryId;
+
+    private Set<AllergenDto> allergens;
+
+    private Set<UserSymptomPreferenceDto> symptomPreferences;
 }

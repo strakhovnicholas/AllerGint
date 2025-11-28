@@ -93,10 +93,7 @@ public class DiaryPageService {
         validateUserExists(userId);
 
         DiaryPage diary = repository.findById(id)
-                .orElseThrow(() -> {
-                    log.warn("DiaryPage not found for update id={}", id);
-                    return new NotFoundException("DiaryPage not found");
-                });
+                .orElseThrow(() -> new NotFoundException("DiaryPage not found"));
 
         validateOwnership(userId, diary.getUserId());
 
@@ -104,12 +101,42 @@ public class DiaryPageService {
         diary.setTimestamp(dto.getTimestamp());
         diary.setUserNotes(dto.getUserNotes());
 
+        if (dto.getMedicines() != null) {
+            diary.getMedicines().clear();
+            for (MedicineDto medicineDto : dto.getMedicines()) {
+                var created = medicineService.create(medicineDto);
+                var entity = medicineMapper.toEntity(created);
+                diary.getMedicines().add(entity);
+            }
+        }
+
+        // --- Symptoms ---
+        if (dto.getUserSymptoms() != null) {
+            diary.getUserSymptoms().clear();
+            for (UserSymptomDto symptomDto : dto.getUserSymptoms()) {
+                var created = symptomService.create(symptomDto);
+                var entity = symptomMapper.toEntity(created);
+                diary.getUserSymptoms().add(entity);
+            }
+        }
+
+        // --- Weather ---
+        if (dto.getWeathers() != null) {
+            diary.getWeathers().clear();
+            for (WeatherDto weatherDto : dto.getWeathers()) {
+                var created = weatherService.create(weatherDto);
+                var entity = weatherMapper.toEntity(created);
+                diary.getWeathers().add(entity);
+            }
+        }
+
         diary = repository.save(diary);
         log.info("DiaryPage updated id={}", id);
 
         checkAndSendToKafka(diary);
         return mapper.toDto(diary);
     }
+
 
     public void delete(UUID id, UUID userId) {
         log.info("Deleting diaryPage id={} by userId={}", id, userId);
@@ -163,7 +190,7 @@ public class DiaryPageService {
 
         LocalDate day = timestamp.withZoneSameInstant(ZoneId.systemDefault()).toLocalDate();
 
-        DiaryPage diary = repository.findByUserIdAndExactDay(userId, ZonedDateTime.from(day))
+        DiaryPage diary = repository.findByUserIdAndExactDay(userId, day)
                 .orElseThrow(() -> {
                     log.warn("DiaryPage not found for userId={} on day={}", userId, day);
                     return new NotFoundException("DiaryPage not found for the specified day");

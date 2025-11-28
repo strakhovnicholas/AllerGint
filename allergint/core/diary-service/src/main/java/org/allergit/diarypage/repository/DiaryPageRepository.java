@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -24,5 +24,7 @@ public interface DiaryPageRepository extends JpaRepository<DiaryPage, UUID> {
             "LEFT JOIN FETCH d.weathers " +
             "WHERE d.userId = :userId " +
             "AND FUNCTION('DATE', d.timestamp) = :date")
-    Optional<DiaryPage> findByUserIdAndExactDay(@Param("userId") UUID userId, @Param("date") ZonedDateTime date);
+    Optional<DiaryPage> findByUserIdAndExactDay(@Param("userId") UUID userId,
+                                                @Param("date") LocalDate date);
 }
+

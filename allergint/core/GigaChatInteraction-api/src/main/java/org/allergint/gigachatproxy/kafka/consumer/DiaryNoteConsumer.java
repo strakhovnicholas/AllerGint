@@ -6,6 +6,8 @@ import org.allergint.gigachatproxy.kafka.KafkaConfig;
 import org.allergint.gigachatproxy.service.GigaChatService;
 import org.allergit.diary.kafka.AiDiaryNoteResponse;
 import org.allergit.diary.kafka.DiaryNoteMessage;
+import org.allergit.feign.UserClient;
+import org.allergit.user.dto.UserDto;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -14,9 +16,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Slf4j
 public class DiaryNoteConsumer {
-
     private final GigaChatService aiService;
     private final KafkaTemplate<String, AiDiaryNoteResponse> kafkaTemplate;
+    private final UserClient userClient;
 
     @KafkaListener(topics = KafkaConfig.DIARY_NOTES_TOPIC,
             groupId = "diary-note-group",
@@ -25,8 +27,9 @@ public class DiaryNoteConsumer {
     public void consume(DiaryNoteMessage message) {
         log.info("Received DiaryNoteMessage={}", message);
 
-        StringBuilder prompt = new StringBuilder();
+        UserDto user = userClient.getById(message.getUserId());
 
+        StringBuilder prompt = new StringBuilder();
         prompt.append("Ты — опытный врач-аллерголог. Проанализируй дневник самочувствия пациента и составь краткий, полезный отчет.\n\n");
 
         prompt.append("ДАННЫЕ ИЗ ДНЕВНИКА:\n");
@@ -57,24 +60,38 @@ public class DiaryNoteConsumer {
             );
         }
 
-// 3. Четкое, конкретное задание с действиями
+        if (user.getAllergens() != null && !user.getAllergens().isEmpty()) {
+            prompt.append("• Аллергены пациента: ");
+            user.getAllergens().forEach(allergen -> prompt.append(allergen).append(", "));
+            // убираем последнюю запятую и пробел
+            prompt.setLength(prompt.length() - 2);
+            prompt.append("\n");
+        }
+
+        if (user.getSymptomPreferences() != null && !user.getSymptomPreferences().isEmpty()) {
+            prompt.append("• Важные для пациента симптомы: ");
+            user.getSymptomPreferences().forEach(symptom -> prompt.append(symptom).append(", "));
+            prompt.setLength(prompt.length() - 2);
+            prompt.append("\n");
+        }
+
+
         prompt.append("""
                 ЗАДАНИЕ:
                 На основе этих данных:
                 1. Выяви ВОЗМОЖНЫЕ причины ухудшения/улучшения состояния
-                (например, связь симптомов с погодой:высокая температура и влажность -> мог обостриться атопический дерматит;
-                или прием лекарства -> снижение симптомов).
+                (например, связь симптомов с погодой, прием лекарства, реакция на аллергены).
                 2. Оцени эффективность принятых лекарств (если они указаны).
                 3. Дай 1 - 2 краткие, практические рекомендации на ближайшее время
-                (например, 'при сохранении симптомов обратиться к врачу', 'избегать пребывания на улице при высокой концентрации пыльцы').
-                ТРЕБОВАНИЯ К 
-                -Ответ предназначен для пациента, пиши простым и понятным языком.
-                -Будь конкретен и опирайся ТОЛЬКО на предоставленные данные.
-                        - Не используй маркдаун, списки или символы ( *, -).Только сплошной текст.
-                        - Начни сразу с сути, без вводных слов.
-                -Объем:2 - 4 предложения.Максимум 2000 символов.\s""");
+                (например, 'при сохранении симптомов обратиться к врачу', 'избегать аллергенов').
+                ТРЕБОВАНИЯ К ОТВЕТУ:
+                Ответ предназначен для пациента, пиши простым и понятным языком.
+                Будь конкретен и опирайся ТОЛЬКО на предоставленные данные.
+                Не используй маркдаун, списки или символы. Только сплошной текст.
+                Начни сразу с сути.
+                Объем: 2 - 4 предложения. Максимум 2000 символов.\s""");
 
-        var aiResponse = aiService.sendPrompt(prompt.toString());
+        String aiResponse = aiService.sendPrompt(prompt.toString());
 
         AiDiaryNoteResponse response = new AiDiaryNoteResponse(
                 message.getUserId(),

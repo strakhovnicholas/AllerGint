@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients
+@EnableFeignClients(basePackages = "org.allergit.feign")
 public class GigaChatInteractionApiApplication {
     public static void main(String[] args) {
         SpringApplication.run(GigaChatInteractionApiApplication.class, args);

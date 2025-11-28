@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS diary
 (
     id           UUID PRIMARY KEY,
-    user_id      UUID NOT NULL,
+    user_id   UUID                     NOT NULL,
     health_state VARCHAR(50),
     timestamp TIMESTAMP WITH TIME ZONE NOT NULL,
     user_notes   VARCHAR(1000),
@@ -21,9 +21,9 @@ CREATE TABLE IF NOT EXISTS medicine
 CREATE TABLE IF NOT EXISTS user_symptom
 (
     id            UUID PRIMARY KEY,
-    symptom_name  VARCHAR(255)             NOT NULL,
+    symptom_name VARCHAR(255) NOT NULL,
     symptom_state VARCHAR(50),
-    timestamp TIMESTAMP WITH TIME ZONE
+    timestamp    TIMESTAMP WITH TIME ZONE
 );
 
 CREATE TABLE IF NOT EXISTS weather
