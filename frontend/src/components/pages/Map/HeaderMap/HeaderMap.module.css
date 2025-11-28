@@ -6,7 +6,7 @@
    font-family: var(--font-main);
    width: 100%;
    box-sizing: border-box;
-   margin: 0 auto 1.5rem auto;
+    margin-bottom: 40px;
 }
 
 .headerContent {
@@ -22,12 +22,11 @@
 }
 
 .title {
-   font: var(--font-main);
-   font-size: 1.7rem;
-   font-weight: 700;
-   line-height: 1.2;
-   color: var(--light-color);
-   margin: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 26px;
+    padding-left: 30px;
 }
 
 .iconRow {

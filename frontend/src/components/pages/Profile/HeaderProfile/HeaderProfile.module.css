@@ -1,37 +1,88 @@
 .header {
-   padding: 48px 16px;
-   background-color: var(--blue-color);
-   color: var(--light-color);
-   display: flex;
-   align-items: center;
-   flex-direction: column;
-   gap: 2em;
+    padding: 48px 16px;
+    background-color: var(--blue-color);
+    color: var(--light-color);
+    display: grid;
+    gap: 24px;
 }
 
 .headerTitle {
-   display: flex;
-   align-items: center;
-   font-size: 16px;
-   justify-content: space-between;
-   gap: 1em;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    padding-left: 30px;
 }
 
-.headerTitleTitle {
-   font: var(--font-main);
-   font-size: 1.2rem;
-   font-weight: 700;
-   flex-wrap: wrap;
+.headerTitleLink {
+    display: flex;
+    align-items: center;
 }
 
-.headerTitleDescription {
-   font: var(--font-main);
-   font-size: 1em;
-   font-weight: 500;
-   color: var(--blue-smooth-color);
+.headerTitleLinkSvg {
+    color: var(--light-color);
+    margin-right: 8px;
 }
 
-.headerTitleText {
-   display: flex;
-   flex-direction: column;
-   gap: 0.25em;
+.headerTitleBtn {
+    width: 32px;
+    height: 40px;
+    color: var(--light-color);
+    background-color: var(--blue-header-color);
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+}
+
+.headerCalendarDay {
+    display: grid;
+    grid-template-columns: min-content 1fr min-content;
+    justify-content: center;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--blue-header-color);
+    border-radius: 0.5rem;
+}
+
+.headerCalendarDayTitle {
+    font-size: 16px;
+    line-height: 16px;
+    font-family: var(--font-main);
+    font-weight: 500;
+}
+
+.headerCalendarDayTitles {
+    display: grid;
+    justify-content: center;
+    height: 44px;
+}
+
+.headerCalendarDayBtn {
+    color: var(--light-color);
+}
+
+.headerCalendarDayItems {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5%;
+    margin-top: 1rem;
+}
+
+.headerCalendarDayItem {
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+    height: 72px;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    background-color: var(--blue-header-color);
+}
+
+.headerCalendarDaySubtitle {
+    margin: auto;
+}
+
+.headerCalendarDaySubtitle::first-letter {
+    text-transform: capitalize;
 }

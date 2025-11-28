@@ -1,1 +1,179 @@
+.cardPills {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 1.5rem 1.75rem;
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cardPills:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+}
+
+.pillsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pillsTitle {
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #222;
+}
+
+.showFormBtn {
+    background: linear-gradient(135deg, #4a90e2, #0077cc);
+    color: #fff;
+    border: none;
+    border-radius: 0.75rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.showFormBtn:hover {
+    background: linear-gradient(135deg, #0077cc, #4a90e2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: scale(1.05);
+}
+
+.pillsList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 500px;
+}
+
+.pillItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.9rem 1.2rem;
+    background: #fefefe;
+    border: 1px solid #e0e0e0;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pillItem:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+.pillActions button {
+    background: linear-gradient(135deg, #4a90e2, #0077cc);
+    color: #fff;
+    border: none;
+    border-radius: 0.6rem;
+    padding: 0.4rem 0.7rem;
+    cursor: pointer;
+    font-weight: 500;
+    margin-left: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.pillActions button:hover {
+    background: linear-gradient(135deg, #0077cc, #4a90e2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.noPills {
+    color: #999;
+    font-size: 0.875rem;
+    font-style: italic;
+}
+
+.formOverlay {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.pillAdd {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: #f8faff;
+    border-radius: 1rem;
+    max-width: 500px;
+}
+
+.pillAdd input,
+.pillAdd select {
+    padding: 0.65rem 0.9rem;
+    border-radius: 0.75rem;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.pillAddBtn {
+    background: linear-gradient(135deg, #4a90e2, #0077cc);
+    color: #fff;
+    border: none;
+    border-radius: 0.75rem;
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+}
+
+.pillAddBtn:hover {
+    background: linear-gradient(135deg, #0077cc, #4a90e2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Адаптив */
+@media (max-width: 600px) {
+    .cardPills {
+        padding: 1rem 1rem;
+    }
+
+    .pillItem {
+        padding: 0.75rem 1rem;
+    }
+
+    .pillAdd {
+        padding: 1rem;
+    }
+
+    .pillAdd input,
+    .pillAdd select {
+        padding: 0.55rem 0.8rem;
+    }
+
+}
+
+.pillsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pillsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.pillsTitle {
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #222;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 

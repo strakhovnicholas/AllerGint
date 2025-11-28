@@ -14,7 +14,6 @@ function App() {
             <Routes>
                <Route index element={<Home />} />
                <Route path="notebook" element={<Notebook />} />
-               <Route path="asit" element={<Asit />} />
                <Route path="map" element={<Map />} />
                <Route path="profile" element={<Profile />} />
             </Routes>

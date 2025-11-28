@@ -9,14 +9,8 @@ function Profile() {
       <div>
          <HeaderProfile />
 
-         <div className={style.data}>
-            <DataProfile />
-         </div>
          <div className={style.med}>
             <MedProfile />
-         </div>
-         <div className={style.therapy}>
-            <TherapyProfile />
          </div>
       </div>
    )
