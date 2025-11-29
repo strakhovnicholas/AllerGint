@@ -67,19 +67,19 @@
 
 .noteInput:focus {
     outline: none;
-    border-color: #0077cc;
+    border-color: #00A550;
     box-shadow: 0 0 6px rgba(0, 119, 204, 0.3);
 }
 
 .noteListSub span {
     font-weight: 500;
-    color: #0077cc;
+    color: #00A550;
     font-size: 0.85rem;
 }
 
 .noteAddBtn {
     transition: all ease 0.4s;
-    background-color: #0077cc;
+    background-color: #00A550;
     color: #fff;
     padding: 0.9rem;
     border-radius: 1rem;
@@ -89,7 +89,7 @@
 }
 
 .noteAddBtn:hover {
-    background-color: #3399ff;
+    background-color: #00A550;
 }
 
 .noteAddBtn:active {

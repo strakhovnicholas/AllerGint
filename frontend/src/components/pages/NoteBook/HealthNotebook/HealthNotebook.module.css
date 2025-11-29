@@ -38,13 +38,13 @@
 }
 
 .healthBtn:hover {
-    background-color: #0077cc;
+    background-color: #00A550;
     color: #fff;
     box-shadow: 0 3px 8px rgba(0, 119, 204, 0.2);
 }
 
 .healthBtnActive {
-    background-color: #0077cc;
+    background-color: #00A550;
     color: #fff;
     box-shadow: 0 3px 8px rgba(0, 119, 204, 0.25);
 }

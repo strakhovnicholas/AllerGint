@@ -48,7 +48,7 @@ function RecomendationsHome() {
   }, [])
 
   return (
-    <div className="card first">
+    <div className="card">
       <div className="title">Рекомендации на сегодня</div>
 
       <div className={style.recomendations}>

@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react'
-import { FaBell } from 'react-icons/fa'
-import { CiSun } from 'react-icons/ci'
 import style from './HeaderHome.module.css'
 import { getWeatherDescription } from '../../../../utils/weatherCodes'
 
@@ -17,8 +15,6 @@ interface User {
 }
 
 function HeaderHome() {
-    const BellIcon = FaBell as React.ComponentType
-    const SunIcon = CiSun as React.ComponentType
 
     const [card, setCard] = useState<WeatherCard | null>(null)
     const [user, setUser] = useState<User | null>(null)
@@ -56,7 +52,7 @@ function HeaderHome() {
     }, [])
 
     return (
-        <div className={style.header}>
+        <header className={style.header}>
             <div className={style.headerTitle}>
                 <div className={style.headerTitleText}>
                     <h1 className={style.headerTitleTitle}>
@@ -84,7 +80,7 @@ function HeaderHome() {
                     </div>
                 </div>
             </div>
-        </div>
+        </header>
     )
 }
 

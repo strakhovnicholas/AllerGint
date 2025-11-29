@@ -8,7 +8,7 @@
 }
 
 .cell {
-   background-color: var(--lightblue-background-color);
+   background-color: var(--lightgreen-background-color);
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -21,13 +21,12 @@
 }
 
 .cell:active {
-   background-color: var(--lightblue-transparent-color);
+   background-color: var(--lightgreen-background-color);
    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
 }
 
 .icon {
-   filter: invert(24%) sepia(55%) saturate(1200%) hue-rotate(185deg)
-      brightness(90%) contrast(90%);
+   filter: brightness(0) saturate(100%) invert(40%) sepia(40%) saturate(600%) hue-rotate(100deg);
 }
 
 .text {

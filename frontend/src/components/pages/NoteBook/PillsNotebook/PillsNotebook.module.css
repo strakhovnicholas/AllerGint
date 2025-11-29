@@ -27,7 +27,7 @@
 }
 
 .showFormBtn {
-    background: linear-gradient(135deg, #4a90e2, #0077cc);
+    background: #00A550;
     color: #fff;
     border: none;
     border-radius: 0.75rem;
@@ -39,7 +39,7 @@
 }
 
 .showFormBtn:hover {
-    background: linear-gradient(135deg, #0077cc, #4a90e2);
+    background: #00A550;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     transform: scale(1.05);
 }
@@ -69,7 +69,7 @@
 }
 
 .pillActions button {
-    background: linear-gradient(135deg, #4a90e2, #0077cc);
+    background: #00A550;
     color: #fff;
     border: none;
     border-radius: 0.6rem;
@@ -81,7 +81,7 @@
 }
 
 .pillActions button:hover {
-    background: linear-gradient(135deg, #0077cc, #4a90e2);
+    background: #00A550;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
@@ -116,7 +116,7 @@
 }
 
 .pillAddBtn {
-    background: linear-gradient(135deg, #4a90e2, #0077cc);
+    background: #00A550;
     color: #fff;
     border: none;
     border-radius: 0.75rem;
@@ -128,7 +128,7 @@
 }
 
 .pillAddBtn:hover {
-    background: linear-gradient(135deg, #0077cc, #4a90e2);
+    background: #00A550;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
