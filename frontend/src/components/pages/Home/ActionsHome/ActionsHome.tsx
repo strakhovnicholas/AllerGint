@@ -13,7 +13,7 @@ function ActionsHome() {
                      className={style.icon}
                   />
                </div>
-               <p className={style.text}>Принять лекарство</p>
+               <p className={style.text}>Учет приема лекарств</p>
             </button>
             <Link to="/notebook" className={style.actionButton}>
                <div className={style.iconWrapper}>
