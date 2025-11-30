@@ -30,7 +30,7 @@
 }
 
 .cardHeader button {
-    background-color: #0077cc;
+    background-color: var(--green-header, #66bb6a);;
     color: #fff;
     border: none;
     border-radius: 0.5rem;
@@ -41,7 +41,7 @@
 }
 
 .cardHeader button:hover {
-    background-color: #005fa3;
+    background-color: var(--green-header, #66bb6a);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
 }
 
@@ -143,8 +143,10 @@
     border-radius: 0.5rem;
     border: none;
     cursor: pointer;
-    background-color: #0077cc;
-    color: #fff;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+    background: linear-gradient(135deg, var(--green-header, #66bb6a) 0%, rgba(76, 175, 80, 0.9) 100%);
+    color: white;
 }
 
 .popupContent button:hover {
@@ -314,7 +316,8 @@
     font-weight: 700;
 }
 .iconButton {
-  background-color: #0077cc;
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+    background: linear-gradient(135deg, var(--green-header, #66bb6a) 0%, rgba(76, 175, 80, 0.9) 100%);
   border-radius: 50%;
   width: 32px;
   height: 32px;
@@ -327,4 +330,6 @@
   width: 20px;
   height: 20px;
 }
+
+
 

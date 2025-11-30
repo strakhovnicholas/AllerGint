@@ -38,7 +38,7 @@ function DiaryNotebook() {
 
     useEffect(() => {
         const today = new Date()
-        const isoDate = today.toISOString() // '2025-11-28T10:00:00Z'
+        const isoDate = today.toISOString()
 
         fetch(`http://localhost:8080/api/diary/day?timestamp=${isoDate}`, {
             headers: {
@@ -76,11 +76,11 @@ function DiaryNotebook() {
 
                 <div className={styles.headerCalendarDayItems}>
                     <div className={styles.headerCalendarDayItem}>
-                        <h5>{page?.userSymptoms.length ?? 0}</h5>
+                        <h5>{page?.userSymptoms?.length ?? 0}</h5>
                         <p className="headerSubtitle">Симптомов</p>
                     </div>
                     <div className={styles.headerCalendarDayItem}>
-                        <h5>{page?.medicines.length ?? 0}</h5>
+                        <h5>{page?.medicines?.length ?? 0}</h5>
                         <p className="headerSubtitle">Лекарства</p>
                     </div>
                     <div className={styles.headerCalendarDayItem}>

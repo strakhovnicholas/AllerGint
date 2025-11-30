@@ -1,6 +1,6 @@
 .aiRecommendationsContainer {
   width: 80%;
-  max-width: 900px;
+  /*max-width: 900px;*/
   margin: 0 auto 2rem;
   padding: 2rem;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.4) 100%);

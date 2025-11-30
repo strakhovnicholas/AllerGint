@@ -158,7 +158,7 @@ export default function MedProfile() {
                                         <span>{al.name} ({al.monthsOfManifestation.map(m => monthMap[m]).join(', ')})</span>
                                         <div>
                                             <button style={{
-                                                backgroundColor: '#0077cc',
+                                                backgroundColor: '#34a753',
                                                 borderRadius: '50%',
                                                 width: '32px',
                                                 height: '32px',
@@ -170,7 +170,7 @@ export default function MedProfile() {
                                                      style={{width: '20px', height: '20px'}}/>
                                             </button>
                                             <button style={{
-                                                backgroundColor: '#0077cc',
+                                                backgroundColor: '#34a753',
                                                 borderRadius: '50%',
                                                 width: '32px',
                                                 height: '32px',
@@ -206,7 +206,7 @@ export default function MedProfile() {
                                         <span>{sp.symptomName}</span>
                                         <div>
                                             <button style={{
-                                                backgroundColor: '#0077cc',
+                                                backgroundColor: '#34a753',
                                                 borderRadius: '50%',
                                                 width: '32px',
                                                 height: '32px',
@@ -218,7 +218,7 @@ export default function MedProfile() {
                                                      style={{width: '20px', height: '20px'}}/>
                                             </button>
                                             <button style={{
-                                                backgroundColor: '#0077cc',
+                                                backgroundColor: '#34a753',
                                                 borderRadius: '50%',
                                                 width: '32px',
                                                 height: '32px',
