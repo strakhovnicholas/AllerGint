@@ -1,4 +1,3 @@
-import Header from '../../UI/Header/Header'
 import MedProfile from './MedProfile/MedProfile'
 import style from './Profile.module.css'
 

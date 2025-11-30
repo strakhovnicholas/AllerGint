@@ -1,5 +1,5 @@
-import React from 'react'
-import styles from './Notebook.module.css'
+import DiaryNotebook from './DiaryNotebook/DiaryNotebook'
+import AiRecommendationsNotebook from './AiRecommendationsNotebook/AiRecommendationsNotebook'
 import HealthNotebook from './HealthNotebook/HealthNotebook'
 import SymptomNotebook from './SymptomsNotebook/SymptomNotebook'
 import PillsNotebook from './PillsNotebook/PillsNotebook'
@@ -8,7 +8,9 @@ import WheatherNotebook from './WheatherNotebook/WheatherNotebook'
 
 function Notebook() {
   return (
-    <div className={styles.notebookWrapper}>
+    <div>
+      <DiaryNotebook />
+      <AiRecommendationsNotebook />
       <HealthNotebook></HealthNotebook>
       <SymptomNotebook></SymptomNotebook>
       <PillsNotebook></PillsNotebook>

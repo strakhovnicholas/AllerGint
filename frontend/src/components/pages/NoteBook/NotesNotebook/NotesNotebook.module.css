@@ -3,9 +3,11 @@
     flex-direction: column;
     gap: 1.25rem;
     padding: 1.5rem 2rem;
-    background: #fff;
+    background: linear-gradient(135deg, var(--green-card-light, #f7fcf8) 0%, var(--green-card, #f0f9f1) 100%);
+    border: 1px solid rgba(65, 150, 68, 0.3);
     border-radius: 1rem;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    width: 80%;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 

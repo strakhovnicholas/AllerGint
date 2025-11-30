@@ -26,7 +26,13 @@
   --green-header-light: #81c784;
   --green-soft: #e8f5e9;
   --green-very-light: #f5faf6;
+  --green-card: #f0f9f1;
+  --green-card-light: #f7fcf8;
   --green-border-light: rgba(76, 175, 80, 0.2);
+  --green-text-dark: #1b5e20;
+  --green-text-medium: #2e7d32;
+  --green-shadow: rgba(76, 175, 80, 0.15);
+  --green-shadow-hover: rgba(76, 175, 80, 0.25);
   --gray-color: rgb(156, 163, 175);
   --gray-bg-color: rgba(156, 163, 175, 0.3);
   --gray-smooth-color: #4b5563;
@@ -45,7 +51,7 @@
 }
 
 body {
-  background: linear-gradient(180deg, #ffffff 0%, var(--green-very-light, #f5faf6) 100%);
+  background: linear-gradient(180deg, var(--green-soft, #e8f5e9) 0%, var(--green-very-light, #f5faf6) 100%);
   background-attachment: fixed;
   min-height: 100vh;
 }
@@ -54,7 +60,7 @@ a,
 a:link,
 a:visited {
   text-decoration: none;
-  color: black;
+  color: var(--green-text-dark, #1b5e20);
 }
 
 a:hover {
@@ -90,9 +96,10 @@ h5 {
   width: 92%;
   margin: auto;
   padding: 1rem;
-  box-shadow: 0 5px 10px 1px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 5px 15px rgba(76, 175, 80, 0.2);
   border-radius: 1.5rem;
-  background-color: #fff;
+  background: linear-gradient(135deg, var(--green-card-light, #f7fcf8) 0%, var(--green-card, #f0f9f1) 100%);
+  border: 1px solid rgba(76, 175, 80, 0.15);
   margin-bottom: 2rem;
 }
 
@@ -107,7 +114,7 @@ h5 {
   font: var(--font-main);
   font-size: 1.4rem;
   font-weight: 600;
-  color: var(--dark-color);
+  color: var(--green-text-dark, #1b5e20);
 }
 
 .headerSubtitle {

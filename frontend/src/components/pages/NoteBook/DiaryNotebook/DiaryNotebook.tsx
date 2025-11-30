@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import styles from './HeaderNotebook.module.css'
+import styles from './DiaryNotebook.module.css'
 import { formatDateTime } from '../../../../utils/formatDateTime'
 
 interface MedicineDto {
@@ -32,7 +32,7 @@ interface DiaryPageDto {
 const getDay = (date: Date): string =>
     date.toLocaleString('ru-RU', { weekday: 'long' })
 
-function HeaderNotebook() {
+function DiaryNotebook() {
     const [page, setPage] = useState<DiaryPageDto | null>(null)
     const userId = 'b1d60e91-97e6-4659-ae7f-bde6808e2c4c'
 
@@ -52,6 +52,7 @@ function HeaderNotebook() {
 
     const date = new Date()
     const currentDateTime = formatDateTime(date)
+    const dateParts = currentDateTime.split(',').slice(0, -1).join(',')
 
     return (
         <div className={styles.header}>
@@ -61,16 +62,16 @@ function HeaderNotebook() {
 
             <div className={styles.headerCalendar}>
                 <div className={styles.headerCalendarDay}>
-                    <button className={styles.headerCalendarDayBtn}>◀</button>
+                    <button className={styles.headerCalendarDayBtn}>⭠</button>
                     <div className={styles.headerCalendarDayTitles}>
                         <p className={styles.headerCalendarDayTitle}>
-                            {currentDateTime.split(',').slice(0, -1)}
+                            {dateParts}
                         </p>
                         <p className={styles.headerCalendarDaySubtitle}>
                             {getDay(date)}
                         </p>
                     </div>
-                    <button className={styles.headerCalendarDayBtn}>▶</button>
+                    <button className={styles.headerCalendarDayBtn}>⭢</button>
                 </div>
 
                 <div className={styles.headerCalendarDayItems}>
@@ -92,4 +93,4 @@ function HeaderNotebook() {
     )
 }
 
-export default HeaderNotebook
+export default DiaryNotebook
