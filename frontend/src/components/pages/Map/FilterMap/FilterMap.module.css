@@ -39,5 +39,5 @@
 
 .filterItemActive {
    color: var(--light-color);
-   background-color: var(--blue-header-color);
+   background-color: var(--green-header-light);
 }

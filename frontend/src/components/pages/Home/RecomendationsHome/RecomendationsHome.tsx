@@ -48,18 +48,35 @@ function RecomendationsHome() {
   }, [])
 
   return (
-    <div className="card first">
-      <div className="title">Рекомендации на сегодня</div>
+    <div className={style.recomendationsContainer}>
+      <div className={style.header}>
+        <div className={style.iconWrapper}>
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </div>
+        <div className={style.headerText}>
+          <h2 className={style.title}>Рекомендации</h2>
+          <p className={style.subtitle}>на сегодня</p>
+        </div>
+      </div>
 
       <div className={style.recomendations}>
         {loading ? (
-          <p>Загрузка рекомендаций...</p>
+          <div className={style.loading}>Загрузка рекомендаций...</div>
         ) : error ? (
-          <p style={{ color: 'red' }}>{error}</p>
+          <div className={style.error}>{error}</div>
         ) : aiNotes?.aiNotes ? (
-          aiNotes.aiNotes.split('\n').map((line, index) => <p key={index}>{line}</p>)
+          aiNotes.aiNotes.split('\n').filter(line => line.trim()).map((line, index) => (
+            <div key={index} className={style.recomendationItem}>
+              <div className={style.bullet}></div>
+              <p>{line}</p>
+            </div>
+          ))
         ) : (
-          <p>Нет рекомендаций на сегодня</p>
+          <div className={style.empty}>Нет рекомендаций на сегодня</div>
         )}
       </div>
     </div>

@@ -3,21 +3,23 @@
     flex-direction: column;
     gap: 1.25rem;
     padding: 1.5rem 2rem;
-    background: #fff;
+    background: linear-gradient(135deg, var(--green-card-light, #f7fcf8) 0%, var(--green-card, #f0f9f1) 100%);
+    border: 1px solid rgba(65, 150, 68, 0.3);
     border-radius: 1rem;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 6px 18px rgba(76, 175, 80, 0.15);
+    width: 80%;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .cardHealth:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 10px 22px rgba(76, 175, 80, 0.25);
 }
 
 .healthTitle {
     font-weight: 700;
     font-size: 1.3rem;
-    color: #222;
+    color: var(--green-text-dark, #1b5e20);
 }
 
 .healthButtons {
@@ -38,13 +40,13 @@
 }
 
 .healthBtn:hover {
-    background-color: #0077cc;
+    background-color: #00A550;
     color: #fff;
     box-shadow: 0 3px 8px rgba(0, 119, 204, 0.2);
 }
 
 .healthBtnActive {
-    background-color: #0077cc;
+    background-color: #00A550;
     color: #fff;
     box-shadow: 0 3px 8px rgba(0, 119, 204, 0.25);
 }

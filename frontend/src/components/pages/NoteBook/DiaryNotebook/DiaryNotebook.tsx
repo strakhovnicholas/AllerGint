@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import styles from './HeaderNotebook.module.css'
+import styles from './DiaryNotebook.module.css'
 import { formatDateTime } from '../../../../utils/formatDateTime'
 
 interface MedicineDto {
@@ -33,13 +32,13 @@ interface DiaryPageDto {
 const getDay = (date: Date): string =>
     date.toLocaleString('ru-RU', { weekday: 'long' })
 
-function HeaderNotebook() {
+function DiaryNotebook() {
     const [page, setPage] = useState<DiaryPageDto | null>(null)
     const userId = 'b1d60e91-97e6-4659-ae7f-bde6808e2c4c'
 
     useEffect(() => {
         const today = new Date()
-        const isoDate = today.toISOString() // '2025-11-28T10:00:00Z'
+        const isoDate = today.toISOString()
 
         fetch(`http://localhost:8080/api/diary/day?timestamp=${isoDate}`, {
             headers: {
@@ -53,6 +52,7 @@ function HeaderNotebook() {
 
     const date = new Date()
     const currentDateTime = formatDateTime(date)
+    const dateParts = currentDateTime.split(',').slice(0, -1).join(',')
 
     return (
         <div className={styles.header}>
@@ -62,25 +62,25 @@ function HeaderNotebook() {
 
             <div className={styles.headerCalendar}>
                 <div className={styles.headerCalendarDay}>
-                    <button className={styles.headerCalendarDayBtn}>◀</button>
+                    <button className={styles.headerCalendarDayBtn}>⭠</button>
                     <div className={styles.headerCalendarDayTitles}>
                         <p className={styles.headerCalendarDayTitle}>
-                            {currentDateTime.split(',').slice(0, -1)}
+                            {dateParts}
                         </p>
                         <p className={styles.headerCalendarDaySubtitle}>
                             {getDay(date)}
                         </p>
                     </div>
-                    <button className={styles.headerCalendarDayBtn}>▶</button>
+                    <button className={styles.headerCalendarDayBtn}>⭢</button>
                 </div>
 
                 <div className={styles.headerCalendarDayItems}>
                     <div className={styles.headerCalendarDayItem}>
-                        <h5>{page?.userSymptoms.length ?? 0}</h5>
+                        <h5>{page?.userSymptoms?.length ?? 0}</h5>
                         <p className="headerSubtitle">Симптомов</p>
                     </div>
                     <div className={styles.headerCalendarDayItem}>
-                        <h5>{page?.medicines.length ?? 0}</h5>
+                        <h5>{page?.medicines?.length ?? 0}</h5>
                         <p className="headerSubtitle">Лекарства</p>
                     </div>
                     <div className={styles.headerCalendarDayItem}>
@@ -93,4 +93,4 @@ function HeaderNotebook() {
     )
 }
 
-export default HeaderNotebook
+export default DiaryNotebook

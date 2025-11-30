@@ -1,17 +1,16 @@
-import React from 'react'
-import styles from './Notebook.module.css'
-import HeaderNotebook from './HeaderNotebook/HeaderNotebook'
+import DiaryNotebook from './DiaryNotebook/DiaryNotebook'
+import AiRecommendationsNotebook from './AiRecommendationsNotebook/AiRecommendationsNotebook'
 import HealthNotebook from './HealthNotebook/HealthNotebook'
 import SymptomNotebook from './SymptomsNotebook/SymptomNotebook'
-import TriggersNotebook from './TriggersNotebook/TriggersNotebook'
 import PillsNotebook from './PillsNotebook/PillsNotebook'
 import NotesNotebook from './NotesNotebook/NotesNotebook'
 import WheatherNotebook from './WheatherNotebook/WheatherNotebook'
 
 function Notebook() {
   return (
-    <div className={styles.notebookWrapper}>
-      <HeaderNotebook></HeaderNotebook>
+    <div>
+      <DiaryNotebook />
+      <AiRecommendationsNotebook />
       <HealthNotebook></HealthNotebook>
       <SymptomNotebook></SymptomNotebook>
       <PillsNotebook></PillsNotebook>

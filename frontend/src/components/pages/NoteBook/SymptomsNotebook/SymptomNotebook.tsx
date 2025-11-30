@@ -175,13 +175,6 @@ function SymptomNotebook() {
 
             {!loading && (
                 <>
-                    {day?.aiNotes && (
-                        <div className={styles.aiNotesCard}>
-                            <p className={styles.aiNotesTitle}>AI рекомендации:</p>
-                            <p className={styles.aiNotesText}>{day.aiNotes}</p>
-                        </div>
-                    )}
-
                     <div className={styles.symptomTitle}>
                         <p className="title">Симптомы</p>
                         <button className={styles.symptomBtn} onClick={() => setShowModal(true)}>+ Добавить</button>

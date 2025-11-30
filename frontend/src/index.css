@@ -1,10 +1,10 @@
 :root {
-  --blue-color: rgb(37 93 138);
-  --blue-header-color: rgb(59, 110, 150);
+  --blue-color: rgb(68,148,74);
+  --blue-header-color: rgb(68,148,74);
   --blue-smooth-color: #bfdbfe;
-  --blue-bg-color: rgb(232, 244, 253);
-  --lightblue-transparent-color: rgb(239, 246, 255);
-  --lightblue-background-color: #e8f4fd;
+  --blue-bg-color: rgb(213, 247, 214);
+  --lightblue-transparent-color: rgb(213, 247, 214);
+  --lightgreen-background-color: rgb(213, 247, 214);
   --light-color: #fff;
   --light-transparent-color: rgb(255 255 255 / 0.1);
   --dark-color: #000000;
@@ -21,6 +21,18 @@
   --yellow-border-color: rgb(254, 240, 138);
   --green-color: rgb(34, 197, 94);
   --green-bg-color: rgb(240, 253, 244);
+  --green-primary: #4caf50;
+  --green-header: #66bb6a;
+  --green-header-light: #81c784;
+  --green-soft: #e8f5e9;
+  --green-very-light: #f5faf6;
+  --green-card: #f0f9f1;
+  --green-card-light: #f7fcf8;
+  --green-border-light: rgba(76, 175, 80, 0.2);
+  --green-text-dark: #1b5e20;
+  --green-text-medium: #2e7d32;
+  --green-shadow: rgba(76, 175, 80, 0.15);
+  --green-shadow-hover: rgba(76, 175, 80, 0.25);
   --gray-color: rgb(156, 163, 175);
   --gray-bg-color: rgba(156, 163, 175, 0.3);
   --gray-smooth-color: #4b5563;
@@ -38,11 +50,17 @@
   font-family: var(--font-main);
 }
 
+body {
+  background: linear-gradient(180deg, var(--green-soft, #e8f5e9) 0%, var(--green-very-light, #f5faf6) 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
 a,
 a:link,
 a:visited {
   text-decoration: none;
-  color: black;
+  color: var(--green-text-dark, #1b5e20);
 }
 
 a:hover {
@@ -78,9 +96,10 @@ h5 {
   width: 92%;
   margin: auto;
   padding: 1rem;
-  box-shadow: 0 5px 10px 1px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 5px 15px rgba(76, 175, 80, 0.2);
   border-radius: 1.5rem;
-  background-color: #fff;
+  background: linear-gradient(135deg, var(--green-card-light, #f7fcf8) 0%, var(--green-card, #f0f9f1) 100%);
+  border: 1px solid rgba(76, 175, 80, 0.15);
   margin-bottom: 2rem;
 }
 
@@ -95,7 +114,7 @@ h5 {
   font: var(--font-main);
   font-size: 1.4rem;
   font-weight: 600;
-  color: var(--dark-color);
+  color: var(--green-text-dark, #1b5e20);
 }
 
 .headerSubtitle {

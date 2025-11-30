@@ -8,7 +8,8 @@
 }
 
 .notification {
-   background-color: #fff;
+   background: linear-gradient(135deg, var(--green-card-light, #f7fcf8) 0%, var(--green-card, #f0f9f1) 100%);
+   border: 1px solid rgba(76, 175, 80, 0.15);
    border-radius: 12px;
    padding: 0.5rem 1rem;
    margin-bottom: 12px;
